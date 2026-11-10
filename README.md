@@ -1,12 +1,12 @@
-# ShodhSetu: research-first AI edtech
+# LabLeap: research-first AI edtech
 
-![ShodhSetu logo](brand/logo-full.png)
+![LabLeap logo](brand/logo-full.png)
 
 Founders: Shikhar Dubey and Sanhita Saxena
 
 We turn students into researchers. Through mentored AI research projects run by active IIT researchers, students build real work and a strong profile for research internships, higher studies and AI jobs.
 
-"ShodhSetu" (शोध सेतु, "research bridge") is a working name. Check the domain, trademark and social handles before using it publicly.
+**LabLeap** means students leap from the classroom into a research lab. The symbol shows that leap: a network path rising from the ground (the classroom) to a star (the research breakthrough). LabLeap is a working name. Check the domain, trademark and social handles before using it publicly.
 
 ![Strategy poster](exports/strategy-poster-v1.png)
 
@@ -21,7 +21,7 @@ We turn students into researchers. Through mentored AI research projects run by 
 | [docs/05-learning-roadmap-sanhita.md](docs/05-learning-roadmap-sanhita.md) | What Sanhita learns: web for the startup and the path to AI scientist |
 | [assets/mind-map-v2.png](assets/mind-map-v2.png) | Mind map v2: objective, niches, pricing, founders, growth (also `.svg`) |
 | [assets/mind-map-v1.png](assets/mind-map-v1.png) | Mind map v1 from the first plan |
-| [brand/](brand/) | Logo: `logo-full.svg/png` (icon and name), `logo-icon.svg/png` (icon only) |
+| [brand/](brand/) | Logo (made by `source/make-logo.py`): `logo-full.svg/png` (icon and name), `logo-icon.svg/png` (icon only) |
 | [exports/strategy-poster-v1.pdf](exports/strategy-poster-v1.pdf) | Big strategy poster, A2 size, ready to print (also `.png`) |
 | [exports/startup-plan-v1.pdf](exports/startup-plan-v1.pdf) | PDF of the first plan with mind map |
 | [source/](source/) | Files that generate the exports: poster HTML, plan HTML, mind map script |

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" width="1800" height="1100" font-family="DejaVu Sans, Arial, sans-serif">
 <rect width="1800" height="1100" fill="#f7f9fc"/>
-<text x="900" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">ShodhSetu · How we focus</text>
+<text x="900" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">LabLeap · How we focus</text>
 <path d="M750 560 C 675.0 560, 675.0 190, 720 190" stroke="#3b6ea5" stroke-width="7" fill="none" stroke-linecap="round"/>
 <path d="M480 190 C 445.0 190, 445.0 109.0, 410 109.0" stroke="#3b6ea5" stroke-width="2.5" fill="none" opacity="0.7"/>
 <rect x="30" y="88.0" width="380" height="42" rx="21" fill="#ffffff" stroke="#3b6ea5" stroke-width="2"/>
@@ -104,8 +104,8 @@
 <rect x="1080" y="898" width="240" height="64" rx="32" fill="#b0414f"/>
 <text x="1200" y="938" text-anchor="middle" font-size="23" font-weight="bold" fill="#fff">Growth engine</text>
 <circle cx="900" cy="560" r="150" fill="#17324d"/>
-<g transform="translate(845,435) scale(0.55)"><path d="M38 120 Q100 28 162 120" fill="none" stroke="#2ec4a0" stroke-width="9" stroke-linecap="round"/><g stroke="#2ec4a0" stroke-width="4"><line x1="62" y1="92" x2="62" y2="128"/><line x1="100" y1="74" x2="100" y2="128"/><line x1="138" y1="92" x2="138" y2="128"/><line x1="62" y1="92" x2="100" y2="74"/><line x1="100" y1="74" x2="138" y2="92"/></g><line x1="28" y1="130" x2="172" y2="130" stroke="#fff" stroke-width="9" stroke-linecap="round"/><g fill="#f2a93b"><circle cx="62" cy="92" r="11"/><circle cx="100" cy="74" r="12"/><circle cx="138" cy="92" r="11"/></g><g fill="#fff"><circle cx="38" cy="120" r="10"/><circle cx="162" cy="120" r="10"/></g></g>
-<text x="900" y="582" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Shodh<tspan fill="#2ec4a0">Setu</tspan></text>
+<image href="../brand/logo-icon.svg" x="852" y="432" width="96" height="96"/>
+<text x="900" y="582" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Lab<tspan fill="#2ec4a0">Leap</tspan></text>
 <text x="900" y="618" text-anchor="middle" font-size="16" fill="#cfd8e3">Research-first AI training</text>
 <text x="900" y="640" text-anchor="middle" font-size="16" fill="#cfd8e3">for internships and careers</text>
 </svg>

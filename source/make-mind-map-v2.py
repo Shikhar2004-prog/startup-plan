@@ -13,7 +13,7 @@ HX = {0: 600, 1: 1200}
 HY = [190, 560, 930]
 out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="DejaVu Sans, Arial, sans-serif">',
        f'<rect width="{W}" height="{H}" fill="#f7f9fc"/>',
-       f'<text x="{CX}" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">ShodhSetu · How we focus</text>']
+       f'<text x="{CX}" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">LabLeap · How we focus</text>']
 for i, (name, col, leaves) in enumerate(BRANCHES):
     side = 0 if i < 3 else 1
     hx, hy = HX[side], HY[i % 3]
@@ -32,8 +32,8 @@ for i, (name, col, leaves) in enumerate(BRANCHES):
     out.append(f'<text x="{hx}" y="{hy+8}" text-anchor="middle" font-size="23" font-weight="bold" fill="#fff">{e(name)}</text>')
 # center
 out.append(f'<circle cx="{CX}" cy="{CY}" r="150" fill="#17324d"/>')
-out.append(f'<g transform="translate({CX-55},{CY-125}) scale(0.55)"><path d="M38 120 Q100 28 162 120" fill="none" stroke="#2ec4a0" stroke-width="9" stroke-linecap="round"/><g stroke="#2ec4a0" stroke-width="4"><line x1="62" y1="92" x2="62" y2="128"/><line x1="100" y1="74" x2="100" y2="128"/><line x1="138" y1="92" x2="138" y2="128"/><line x1="62" y1="92" x2="100" y2="74"/><line x1="100" y1="74" x2="138" y2="92"/></g><line x1="28" y1="130" x2="172" y2="130" stroke="#fff" stroke-width="9" stroke-linecap="round"/><g fill="#f2a93b"><circle cx="62" cy="92" r="11"/><circle cx="100" cy="74" r="12"/><circle cx="138" cy="92" r="11"/></g><g fill="#fff"><circle cx="38" cy="120" r="10"/><circle cx="162" cy="120" r="10"/></g></g>')
-out.append(f'<text x="{CX}" y="{CY+22}" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Shodh<tspan fill="#2ec4a0">Setu</tspan></text>')
+out.append(f'<image href="../brand/logo-icon.svg" x="{CX-48}" y="{CY-128}" width="96" height="96"/>')
+out.append(f'<text x="{CX}" y="{CY+22}" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Lab<tspan fill="#2ec4a0">Leap</tspan></text>')
 out.append(f'<text x="{CX}" y="{CY+58}" text-anchor="middle" font-size="16" fill="#cfd8e3">Research-first AI training</text>')
 out.append(f'<text x="{CX}" y="{CY+80}" text-anchor="middle" font-size="16" fill="#cfd8e3">for internships and careers</text>')
 out.append('</svg>')
