@@ -1,6 +1,6 @@
 # Generates brand/logo-icon.svg and brand/logo-full.svg. Change NAME/TAGLINE and re-run: python3 source/make-logo.py
-NAME = ("Lab", "Leap")          # first part navy, second part teal
-TAGLINE = "FROM CLASSROOM TO RESEARCH LAB"
+NAME = ("Leap", "verse")          # first part navy, second part teal
+TAGLINE = "LEAP INTO AI, RESEARCH AND BEYOND"
 
 DEFS = '''<defs>
   <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b2f6b"/><stop offset="1" stop-color="#0f6e78"/></linearGradient>

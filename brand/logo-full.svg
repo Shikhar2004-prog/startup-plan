@@ -19,6 +19,6 @@
 <circle cx="152" cy="48" r="30" fill="url(#glow)"/>
 <path d="M152 26 L157 43 L174 48 L157 53 L152 70 L147 53 L130 48 L147 43 Z" fill="#ffc94d"/>
 <circle cx="152" cy="48" r="4" fill="#ffffff"/>
-<text x="234" y="116" font-family="DejaVu Sans, Arial, sans-serif" font-size="84" font-weight="bold" fill="#14254f" letter-spacing="-1">Lab<tspan fill="url(#word)">Leap</tspan></text>
-<text x="238" y="160" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" fill="#5a6475" letter-spacing="3.5">FROM CLASSROOM TO RESEARCH LAB</text>
+<text x="234" y="116" font-family="DejaVu Sans, Arial, sans-serif" font-size="84" font-weight="bold" fill="#14254f" letter-spacing="-1">Leap<tspan fill="url(#word)">verse</tspan></text>
+<text x="238" y="160" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" fill="#5a6475" letter-spacing="3.5">LEAP INTO AI, RESEARCH AND BEYOND</text>
 </svg>

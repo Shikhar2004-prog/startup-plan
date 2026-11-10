@@ -1,12 +1,12 @@
-# LabLeap: research-first AI edtech
+# Leapverse: leap into AI, research and beyond
 
-![LabLeap logo](brand/logo-full.png)
+![Leapverse logo](brand/logo-full.png)
 
 Founders: Shikhar Dubey and Sanhita Saxena
 
-We turn students into researchers. Through mentored AI research projects run by active IIT researchers, students build real work and a strong profile for research internships, higher studies and AI jobs.
+We help students make their next big leap in AI, research and careers. We start with mentored AI research projects run by active IIT researchers, students build real work and a strong profile for research internships, higher studies and AI jobs.
 
-**LabLeap** means students leap from the classroom into a research lab. The symbol shows that leap: a network path rising from the ground (the classroom) to a star (the research breakthrough). LabLeap is a working name. Check the domain, trademark and social handles before using it publicly.
+**Leapverse** is a universe of leaps: research first, then AI skills, careers and whatever else we add. The symbol shows a leap: a network path rising from the ground (where a student starts) to a star (their breakthrough). Leapverse is a working name. Check the domain, trademark and social handles before using it publicly.
 
 ![Strategy poster](exports/strategy-poster-v1.png)
 

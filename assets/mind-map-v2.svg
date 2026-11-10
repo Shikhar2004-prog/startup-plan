@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" width="1800" height="1100" font-family="DejaVu Sans, Arial, sans-serif">
 <rect width="1800" height="1100" fill="#f7f9fc"/>
-<text x="900" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">LabLeap · How we focus</text>
+<text x="900" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">Leapverse · How we focus</text>
 <path d="M750 560 C 675.0 560, 675.0 190, 720 190" stroke="#3b6ea5" stroke-width="7" fill="none" stroke-linecap="round"/>
 <path d="M480 190 C 445.0 190, 445.0 109.0, 410 109.0" stroke="#3b6ea5" stroke-width="2.5" fill="none" opacity="0.7"/>
 <rect x="30" y="88.0" width="380" height="42" rx="21" fill="#ffffff" stroke="#3b6ea5" stroke-width="2"/>
@@ -105,7 +105,7 @@
 <text x="1200" y="938" text-anchor="middle" font-size="23" font-weight="bold" fill="#fff">Growth engine</text>
 <circle cx="900" cy="560" r="150" fill="#17324d"/>
 <image href="../brand/logo-icon.svg" x="852" y="432" width="96" height="96"/>
-<text x="900" y="582" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Lab<tspan fill="#2ec4a0">Leap</tspan></text>
-<text x="900" y="618" text-anchor="middle" font-size="16" fill="#cfd8e3">Research-first AI training</text>
-<text x="900" y="640" text-anchor="middle" font-size="16" fill="#cfd8e3">for internships and careers</text>
+<text x="900" y="582" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Leap<tspan fill="#2ec4a0">verse</tspan></text>
+<text x="900" y="618" text-anchor="middle" font-size="16" fill="#cfd8e3">Leap into AI, research</text>
+<text x="900" y="640" text-anchor="middle" font-size="16" fill="#cfd8e3">and beyond</text>
 </svg>

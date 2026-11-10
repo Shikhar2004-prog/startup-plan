@@ -13,7 +13,7 @@ HX = {0: 600, 1: 1200}
 HY = [190, 560, 930]
 out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="DejaVu Sans, Arial, sans-serif">',
        f'<rect width="{W}" height="{H}" fill="#f7f9fc"/>',
-       f'<text x="{CX}" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">LabLeap · How we focus</text>']
+       f'<text x="{CX}" y="44" text-anchor="middle" font-size="30" font-weight="bold" fill="#17324d">Leapverse · How we focus</text>']
 for i, (name, col, leaves) in enumerate(BRANCHES):
     side = 0 if i < 3 else 1
     hx, hy = HX[side], HY[i % 3]
@@ -33,8 +33,8 @@ for i, (name, col, leaves) in enumerate(BRANCHES):
 # center
 out.append(f'<circle cx="{CX}" cy="{CY}" r="150" fill="#17324d"/>')
 out.append(f'<image href="../brand/logo-icon.svg" x="{CX-48}" y="{CY-128}" width="96" height="96"/>')
-out.append(f'<text x="{CX}" y="{CY+22}" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Lab<tspan fill="#2ec4a0">Leap</tspan></text>')
-out.append(f'<text x="{CX}" y="{CY+58}" text-anchor="middle" font-size="16" fill="#cfd8e3">Research-first AI training</text>')
-out.append(f'<text x="{CX}" y="{CY+80}" text-anchor="middle" font-size="16" fill="#cfd8e3">for internships and careers</text>')
+out.append(f'<text x="{CX}" y="{CY+22}" text-anchor="middle" font-size="34" font-weight="bold" fill="#fff">Leap<tspan fill="#2ec4a0">verse</tspan></text>')
+out.append(f'<text x="{CX}" y="{CY+58}" text-anchor="middle" font-size="16" fill="#cfd8e3">Leap into AI, research</text>')
+out.append(f'<text x="{CX}" y="{CY+80}" text-anchor="middle" font-size="16" fill="#cfd8e3">and beyond</text>')
 out.append('</svg>')
 open('assets/mind-map-v2.svg', 'w').write('\n'.join(out))
