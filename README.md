@@ -1,26 +1,38 @@
-# Startup plan: research-first AI edtech
+# ShodhSetu: research-first AI edtech
+
+![ShodhSetu logo](brand/logo-full.png)
 
 Founders: Shikhar Dubey and Sanhita Saxena
 
-We take students who have never done research, put them through a mentored AI research project run by active IIT researchers, and help them turn that work into a paper, a portfolio and strong applications for research internships and AI jobs.
+We turn students into researchers. Through mentored AI research projects run by active IIT researchers, students build real work and a strong profile for research internships, higher studies and AI jobs.
 
-![Mind map](assets/mind-map.png)
+"ShodhSetu" (शोध सेतु, "research bridge") is a working name. Check the domain, trademark and social handles before using it publicly.
+
+![Strategy poster](exports/strategy-poster-v1.png)
 
 ## What's in this repository
 
 | Path | What it is |
 |---|---|
-| [docs/01-startup-plan.md](docs/01-startup-plan.md) | Full plan: competitors, offer and pricing, roles, tech, content, first 90 days, scaling, risks |
-| [docs/02-learning-roadmap-shikhar.md](docs/02-learning-roadmap-shikhar.md) | What Shikhar learns first for video content and the startup |
-| [assets/mind-map.png](assets/mind-map.png) | Mind map image |
-| [exports/startup-plan-v1.pdf](exports/startup-plan-v1.pdf) | PDF of the plan with the mind map |
-| [source/startup-plan-v1.html](source/startup-plan-v1.html) | Source the PDF was made from |
+| [docs/01-startup-plan.md](docs/01-startup-plan.md) | Full plan: competitors, offer, tech, content, first 90 days, scaling, risks |
+| [docs/02-learning-roadmap-shikhar.md](docs/02-learning-roadmap-shikhar.md) | What Shikhar learns: teaching on camera, AI, maths, research confidence, startup skills |
+| [docs/03-founder-roles.md](docs/03-founder-roles.md) | Who owns what, how to be better founders, weekly rhythm |
+| [docs/04-niche-markets-and-pricing.md](docs/04-niche-markets-and-pricing.md) | Five niches to target and the pricing ladder |
+| [docs/05-learning-roadmap-sanhita.md](docs/05-learning-roadmap-sanhita.md) | What Sanhita learns: web for the startup and the path to AI scientist |
+| [assets/mind-map-v2.png](assets/mind-map-v2.png) | Mind map v2: objective, niches, pricing, founders, growth (also `.svg`) |
+| [assets/mind-map-v1.png](assets/mind-map-v1.png) | Mind map v1 from the first plan |
+| [brand/](brand/) | Logo: `logo-full.svg/png` (icon and name), `logo-icon.svg/png` (icon only) |
+| [exports/strategy-poster-v1.pdf](exports/strategy-poster-v1.pdf) | Big strategy poster, A2 size, ready to print (also `.png`) |
+| [exports/startup-plan-v1.pdf](exports/startup-plan-v1.pdf) | PDF of the first plan with mind map |
+| [source/](source/) | Files that generate the exports: poster HTML, plan HTML, mind map script |
 
 ## Naming conventions
 
-- Folders: `docs/` for writing, `assets/` for images, `exports/` for PDFs and other shareable files, `source/` for files that generate exports.
+- Folders: `docs/` for writing, `assets/` for diagrams and images, `brand/` for the logo, `exports/` for PDFs and shareable images, `source/` for files that generate exports.
 - Files are lowercase with hyphens, for example `learning-roadmap-sanhita.md`.
-- Docs are numbered in reading order: `01-`, `02-`, `03-`. Add new ones as `03-...`, `04-...`.
-- Exports carry a version: `startup-plan-v1.pdf`, then `startup-plan-v2.pdf` when the plan changes.
+- Docs are numbered in reading order: `01-` to `05-`. Add new ones as `06-...`, `07-...`.
+- Versioned files end in `-v1`, `-v2` and so on. Keep old versions; add a new one when something changes.
 
-Suggested next files: `docs/03-learning-roadmap-sanhita.md`, `docs/04-pilot-course-outline.md`, `docs/05-student-interview-notes.md`.
+To update the mind map, edit the list in `source/make-mind-map-v2.py` and run `python3 source/make-mind-map-v2.py`.
+
+Suggested next files: `docs/06-pilot-course-outline.md`, `docs/07-student-interview-notes.md`, `docs/08-founders-agreement-notes.md`.

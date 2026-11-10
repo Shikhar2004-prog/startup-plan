@@ -9,7 +9,7 @@ Prices and numbers below are starting guesses to test, not facts.
 
 ## Mind map
 
-![Mind map](../assets/mind-map.png)
+![Mind map](../assets/mind-map-v1.png)
 
 ```mermaid
 mindmap

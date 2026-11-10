@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200">
+  <g transform="translate(0,0)">
+    <rect x="0" y="0" width="200" height="200" rx="44" fill="#17324d"/>
+    <g transform="translate(0,-12)"><path d="M38 132 Q100 40 162 132" fill="none" stroke="#2ec4a0" stroke-width="7" stroke-linecap="round"/>
+    <g stroke="#2ec4a0" stroke-width="3">
+      <line x1="62" y1="104" x2="62" y2="140"/><line x1="100" y1="86" x2="100" y2="140"/><line x1="138" y1="104" x2="138" y2="140"/>
+      <line x1="62" y1="104" x2="100" y2="86"/><line x1="100" y1="86" x2="138" y2="104"/>
+    </g>
+    <line x1="28" y1="142" x2="172" y2="142" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+    <g fill="#f2a93b"><circle cx="62" cy="104" r="9"/><circle cx="100" cy="86" r="10"/><circle cx="138" cy="104" r="9"/></g>
+    <g fill="#ffffff"><circle cx="38" cy="132" r="8"/><circle cx="162" cy="132" r="8"/></g></g>
+  </g>
+  <text x="236" y="112" font-family="DejaVu Sans, Arial, sans-serif" font-size="76" font-weight="bold" fill="#17324d">Shodh<tspan fill="#1f9e82">Setu</tspan></text>
+  <text x="240" y="160" font-family="DejaVu Sans, Arial, sans-serif" font-size="27" fill="#5a6475" letter-spacing="3">RESEARCH TO CAREER</text>
+</svg>

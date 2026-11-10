@@ -50,3 +50,26 @@ These are what most technical founders skip.
 - **Mentoring at scale:** giving feedback that students can act on, in a fixed format, so TAs can copy it later.
 - **Asking for feedback:** after every webinar and class, a 3-question form.
 - **Showing results:** collect every student win (report finished, internship interview, offer) with permission. This is the proof that sells the next cohort.
+
+## Maths for AI research (linear algebra, probability and more)
+
+You plan to study linear algebra and probability, which is the right start. Go in this order:
+
+1. **Linear algebra.** 3Blue1Brown "Essence of Linear Algebra" (for intuition), then Gilbert Strang's MIT 18.06 (MIT OpenCourseWare). Focus on: vectors and matrices, rank, eigenvalues, SVD, projections. These appear everywhere in ML.
+2. **Probability and statistics.** Harvard Stat 110 by Joe Blitzstein (free lectures and book). Focus on: random variables, common distributions, Bayes' rule, expectation, variance, maximum likelihood.
+3. **Calculus and optimisation.** Gradients, the chain rule (this is backpropagation), gradient descent and its variants. Later, the basics of convex optimisation.
+4. **One book that ties it together.** "Mathematics for Machine Learning" by Deisenroth, Faisal and Ong (free PDF from the authors).
+5. **Then:** basic information theory (entropy, cross-entropy, KL divergence), because these are the loss functions you already use.
+
+Make a short video for each topic as you learn it ("the linear algebra you need for deep learning"). That is content, GATE prep and research prep at once.
+
+## Becoming confident in AI research
+
+Confidence comes from doing, not reading. A plan:
+
+- **Read 2 papers a week** in your area and write a 5-line summary of each. After 3 months you'll know the field's main ideas.
+- **Reproduce 2 papers** in OCR or document AI with public code. Reproducing teaches you more than reading ten.
+- **Start a "paper explained" video series.** Explaining a paper publicly forces you to really understand it.
+- **Submit to a workshop.** Aim for a workshop or short paper (for example at ICVGIP, ICDAR workshops or a CVPR/ICCV workshop) within a year. Rejection with reviews is useful feedback.
+- **Ask for feedback early.** Show your advisor or lab-mates rough results every two weeks instead of waiting for polished ones.
+- **Keep a research journal.** What you tried, what failed, why. It becomes material for students too.
