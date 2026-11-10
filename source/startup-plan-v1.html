@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Startup Plan</title>
+<style>
+@page { size: A4 portrait; margin: 16mm 15mm; }
+@page map { size: A4 landscape; margin: 10mm; }
+* { box-sizing: border-box; }
+body { font-family: "DejaVu Sans", Arial, sans-serif; color: #1f2430; font-size: 10.5pt; line-height: 1.45; margin: 0; }
+.mappage { page: map; page-break-after: always; }
+h1 { font-size: 20pt; margin: 0 0 4px; color: #17324d; }
+h2 { font-size: 14pt; color: #17324d; border-bottom: 2px solid #e3e8ef; padding-bottom: 3px; margin: 18px 0 8px; }
+h3 { font-size: 11pt; margin: 12px 0 4px; color: #2b4a6b; }
+p { margin: 4px 0 8px; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.sub { color: #5a6475; font-size: 10pt; }
+table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 9.5pt; }
+th, td { border: 1px solid #d6dce5; padding: 5px 7px; vertical-align: top; text-align: left; }
+th { background: #eef2f7; }
+.callout { background: #f4f8fc; border-left: 4px solid #3b6ea5; padding: 8px 12px; margin: 8px 0; }
+.warn { background: #fff7ec; border-left: 4px solid #d98a1f; padding: 8px 12px; margin: 8px 0; }
+.break { page-break-before: always; }
+h2, h3 { break-after: avoid; } tr, .warn, .callout, li { break-inside: avoid; }
+/* mind map */
+.map { position: relative; width: 1050px; height: 690px; margin: 0 auto; }
+.map svg { position: absolute; left: 0; top: 0; }
+.maptitle { position: absolute; left: 0; top: 0; width: 1050px; text-align: center; font-size: 15pt; font-weight: bold; color: #17324d; }
+.center { position: absolute; left: 420px; top: 315px; width: 210px; height: 90px; border-radius: 14px; background: #17324d; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 12.5pt; padding: 8px; }
+.node { position: absolute; width: 170px; height: 46px; border-radius: 10px; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; font-size: 11pt; }
+.leaves { position: absolute; width: 230px; font-size: 9pt; line-height: 1.35; border-radius: 8px; padding: 7px 9px 7px 9px; background: #fff; border: 1.5px solid; }
+.leaves ul { margin: 0; padding-left: 14px; }
+.leaves li { margin: 2px 0; }
+.c1 { background: #3b6ea5; } .b1 { border-color: #3b6ea5; }
+.c2 { background: #2f8f6b; } .b2 { border-color: #2f8f6b; }
+.c3 { background: #8a4fb0; } .b3 { border-color: #8a4fb0; }
+.c4 { background: #c0632a; } .b4 { border-color: #c0632a; }
+.c5 { background: #2a7f9e; } .b5 { border-color: #2a7f9e; }
+.c6 { background: #b0414f; } .b6 { border-color: #b0414f; }
+</style></head>
+<body>
+
+<div class="mappage">
+<div class="map">
+  <div class="maptitle">Mind map: research-first AI edtech startup</div>
+  <svg width="1050" height="690">
+    <g stroke="#9aa6b8" stroke-width="2.5" fill="none">
+      <path d="M420 345 C 380 345, 380 140, 410 140"/>
+      <path d="M420 360 L 410 360"/>
+      <path d="M420 375 C 380 375, 380 580, 410 580"/>
+      <path d="M630 345 C 670 345, 670 140, 640 140"/>
+      <path d="M630 360 L 640 360"/>
+      <path d="M630 375 C 670 375, 670 580, 640 580"/>
+      <path d="M240 140 L 230 140"/><path d="M240 360 L 230 360"/><path d="M240 580 L 230 580"/><path d="M810 140 L 820 140"/><path d="M810 360 L 820 360"/><path d="M810 580 L 820 580"/>
+    </g>
+  </svg>
+  <div class="center">Research-first AI training for placements &amp; research internships</div>
+
+  <!-- left -->
+  <div class="node c1" style="left:240px;top:117px">The offer</div>
+  <div class="leaves b1" style="left:0px;top:60px"><ul>
+    <li>Research Track (8 to 10 weeks): foundations, project, paper</li>
+    <li>Applied AI project: OCR, document AI, vision</li>
+    <li>Paper writing, LaTeX, poster and talk</li>
+    <li>Internship and placement kit: research CV, cold emails, SRIP style applications, interviews</li>
+  </ul></div>
+
+  <div class="node c2" style="left:240px;top:337px">Who it's for</div>
+  <div class="leaves b2" style="left:0px;top:285px"><ul>
+    <li>2nd to 4th year BTech/BSc students, especially outside top colleges</li>
+    <li>Students aiming at IIT/IISc research internships, MS/PhD or AI jobs</li>
+    <li>Know basic Python, never done research</li>
+    <li>Later: working professionals</li>
+  </ul></div>
+
+  <div class="node c3" style="left:240px;top:557px">Why us</div>
+  <div class="leaves b3" style="left:0px;top:505px"><ul>
+    <li>Founders are active IIT researchers and speakers</li>
+    <li>Outcome is real research work, not a certificate</li>
+    <li>Small cohorts, weekly mentor review</li>
+    <li>Priced well below big certificate programs</li>
+  </ul></div>
+
+  <!-- right -->
+  <div class="node c4" style="left:640px;top:117px">Founder roles</div>
+  <div class="leaves b4" style="left:820px;top:60px"><ul>
+    <li>Shikhar: curriculum, OCR/CV projects, videos, YouTube</li>
+    <li>Sanhita: workshops, college tie-ups, student success</li>
+    <li>Both: weekly mentoring and paper reviews</li>
+    <li>First: check PhD rules on side ventures</li>
+  </ul></div>
+
+  <div class="node c5" style="left:640px;top:337px">Tech &amp; coding</div>
+  <div class="leaves b5" style="left:820px;top:285px"><ul>
+    <li>Start no-code: YouTube, Notion, Forms, Razorpay, Discord</li>
+    <li>Teach with Python, PyTorch, Hugging Face, Colab, GitHub, Overleaf</li>
+    <li>Later: Next.js + Supabase site with project tracker</li>
+    <li>Then: AI feedback on student code and drafts</li>
+  </ul></div>
+
+  <div class="node c6" style="left:640px;top:557px">Growth &amp; scale</div>
+  <div class="leaves b6" style="left:820px;top:505px"><ul>
+    <li>Free webinars lead to a paid cohort</li>
+    <li>YouTube + LinkedIn with student results as proof</li>
+    <li>Best alumni become paid TAs and mentors</li>
+    <li>College partnerships, B2B workshops, PhD mentor network</li>
+  </ul></div>
+</div>
+</div>
+
+<h1>Startup plan: research-first AI edtech</h1>
+<p class="sub">Prepared for Shikhar Dubey and Sanhita Saxena · 10 November 2026 · Prices and numbers below are starting guesses to test, not facts.</p>
+
+<div class="callout"><b>One-line pitch.</b> We take students who have never done research, put them through a mentored AI research project run by active IIT researchers, and help them turn that work into a paper, a portfolio and strong applications for research internships and AI jobs.</div>
+
+<h2>1. Competitors and where you fit</h2>
+<table>
+<tr><th style="width:26%">Who</th><th>What they sell</th><th style="width:30%">Gap you can fill</th></tr>
+<tr><td>Scaler, upGrad, Coding Ninjas, AlmaBetter</td><td>Placement bootcamps built around DSA, development and data science, in large batches.</td><td>Little or no real research. You already chose not to compete on DSA.</td></tr>
+<tr><td>IIT-branded certificate programs run through partners (for example Masai with IIT Roorkee EICT, Intellipaat with iHUB IIT Roorkee)</td><td>An IIT name on a certificate plus a broad AI/ML curriculum, usually long and premium-priced.</td><td>The outcome is a certificate, not a research result. Mentoring is thin.</td></tr>
+<tr><td>NPTEL / SWAYAM</td><td>Free or cheap lectures by IIT faculty.</td><td>Credible, but no project, no mentor and no help applying.</td></tr>
+<tr><td>Research mentorship programs (Polygence, Lumiere and similar)</td><td>One-on-one research projects ending in a paper.</td><td>Proves the model works, but they mostly serve high-school students abroad and charge in dollars.</td></tr>
+<tr><td>Official internships (SRIP at IIT Gandhinagar, IIT Mandi summer internship, GRISHMA at IIT Kharagpur, RISE UP at IIT Jammu, ACM iKDD Uplink)</td><td>Not competitors. These are where your students want to end up.</td><td>Many students apply with no research to show. You prepare them.</td></tr>
+</table>
+<p><b>Your position:</b> affordable, India-focused, mentored research by people who are doing research right now, ending in something real (a report, code, a paper draft) plus a strong application. No one in the list combines all of these for Indian college students.</p>
+
+<h3>What makes it different (and attractive)</h3>
+<ul>
+<li><b>Outcome over certificate.</b> Every student leaves with a public GitHub repo, a 4 to 6 page report in conference format, and a short recorded talk.</li>
+<li><b>Real research problems.</b> Start from your own area: OCR, document verification, Indian-language documents. These are useful to industry too (banking KYC, govtech, legal).</li>
+<li><b>"How research actually works" content.</b> Reading papers, picking a question, baselines, ablations, writing, presenting. Almost nobody teaches this to undergrads.</li>
+<li><b>Application coaching.</b> A research CV, emails to professors, statements of purpose and interview practice for research internships.</li>
+<li><b>Honest promise.</b> Say "we prepare you to compete for research internships", never "we place you at an IIT". This builds trust.</li>
+</ul>
+
+<h2>2. The offer and pricing</h2>
+<table>
+<tr><th style="width:22%">Product</th><th>What's inside</th><th style="width:22%">Starting price (test)</th></tr>
+<tr><td>Free webinar / YouTube</td><td>"How to get a research internship", "How to read an AI paper", "OCR in 60 minutes".</td><td>Free (builds your list)</td></tr>
+<tr><td>Pilot cohort (6 weeks)</td><td>20 to 30 students, teams of 2 to 3, one small research question each, weekly live class and review.</td><td>₹1,999 to ₹3,999</td></tr>
+<tr><td>Full Research Track (8 to 10 weeks)</td><td>Foundations (2 wks), project (5 wks), paper and talk (2 wks), application kit (1 wk).</td><td>₹7,999 to ₹14,999, once pilot results exist</td></tr>
+<tr><td>Add-ons</td><td>One-on-one paper review, mock research interview, CV review.</td><td>₹499 to ₹1,499 each</td></tr>
+<tr><td>College workshops (B2B)</td><td>2-day "Intro to AI research" on campus or online.</td><td>Per-workshop fee</td></tr>
+</table>
+
+<h3>Research Track outline</h3>
+<ul>
+<li><b>Weeks 1 to 2, foundations:</b> Python and PyTorch refresher, how to read a paper, using Hugging Face, Git and Colab.</li>
+<li><b>Weeks 3 to 7, project:</b> pick a problem (for example OCR on Hindi forms, detecting tampered documents, table extraction), build a baseline, improve it, run ablations.</li>
+<li><b>Weeks 8 to 9, write and present:</b> Overleaf/LaTeX, figures, a workshop-style paper, a 5-minute talk.</li>
+<li><b>Week 10, career:</b> research CV, GitHub cleanup, cold emails to professors, internship applications, mock interviews.</li>
+</ul>
+
+<h2 class="break">3. Who learns what first</h2>
+<table>
+<tr><th style="width:18%"></th><th>Shikhar</th><th>Sanhita</th></tr>
+<tr><td>Main role</td><td>Curriculum, OCR/CV project design, video and YouTube, tech setup.</td><td>Workshops and webinars, college partnerships, student community and success.</td></tr>
+<tr><td>Learn first (weeks 1 to 4)</td><td>Simple video workflow (OBS for recording, DaVinci Resolve or similar for editing), designing a course backwards from outcomes, setting up Notion, Razorpay and Discord.</td><td>Running an online community (Discord or WhatsApp), outreach to college clubs and placement cells, a simple sales call script, tracking leads in a sheet.</td></tr>
+<tr><td>Learn next</td><td>Basic web stack (Next.js + Supabase) once you need your own site, YouTube SEO and thumbnails.</td><td>Partnership agreements, basic finance (GST, invoicing), hiring and training TAs.</td></tr>
+<tr><td>Shared</td><td colspan="2">Weekly mentoring and paper reviews, company registration basics (LLP or private limited), and a weekly 30-minute review of numbers.</td></tr>
+</table>
+<p class="sub">These roles are a suggestion based on your note that Sanhita has led many seminars. Swap them freely.</p>
+
+<h2>4. Coding and tech strategy</h2>
+<div class="callout"><b>Rule:</b> don't build a platform first. Until about 100 paying students, every hour of coding should go into teaching material, not software.</div>
+<h3>Phase 0: launch with no code (months 0 to 6)</h3>
+<ul>
+<li>YouTube (unlisted for paid lessons), Google Meet or Zoom for live classes.</li>
+<li>Notion as the course site, Google Forms for applications, Razorpay payment links for fees.</li>
+<li>Discord for the community, GitHub Classroom or template repos for projects.</li>
+<li>Optional: a hosted course platform (Graphy, TagMango or similar) if you want login and payments in one place.</li>
+</ul>
+<h3>Code you will write from day one (teaching code)</h3>
+<ul>
+<li>Starter repos and Colab notebooks for each project: data loading, baseline model, evaluation script.</li>
+<li>Stack: Python, PyTorch, Hugging Face Transformers, OpenCV. For OCR: Tesseract, PaddleOCR, TrOCR, Donut, LayoutLM-style models.</li>
+<li>A shared evaluation script per project so student results can be compared fairly (like a small leaderboard).</li>
+<li>Overleaf templates for reports and a slide template for talks.</li>
+</ul>
+<h3>Phase 1: your own site (6 to 18 months)</h3>
+<ul>
+<li>Next.js on Vercel, Supabase for login and database, Razorpay for payments.</li>
+<li>A project tracker: each team's milestones, mentor comments and final report.</li>
+<li>Public student showcase pages (your best marketing).</li>
+</ul>
+<h3>Phase 2: what makes it special at scale</h3>
+<ul>
+<li>AI assistant that gives first-pass feedback on student code and paper drafts, so mentors spend time on the hard parts.</li>
+<li>Automatic leaderboard on shared benchmarks, and a "find a mentor" match with your PhD mentor network.</li>
+</ul>
+
+<h2>5. Video and YouTube content</h2>
+<p>Make one set of videos that serves both YouTube and the course. Free videos bring students in; deeper ones go in the paid track.</p>
+<ul>
+<li><b>Free series:</b> "How I got into research", "How to read an AI paper in 30 minutes", "Research internships in India: SRIP, Uplink and others explained", "OCR from scratch", "What professors look for in an intern's email".</li>
+<li><b>Paid series:</b> step-by-step project builds, writing a paper section by section, ablation studies, presenting your work.</li>
+<li><b>Proof content:</b> short clips of student demo days and before/after stories (with permission).</li>
+<li><b>Rhythm:</b> one long video and two Shorts per week is enough to start.</li>
+</ul>
+
+<h2 class="break">6. First 90 days</h2>
+<table>
+<tr><th style="width:16%">When</th><th>What</th><th style="width:22%">Done when</th></tr>
+<tr><td>Weeks 1 to 2</td><td>Check your institute's rules for PhD scholars on side ventures. Pick a name. Define one track: "Document AI Research Track". Set up Notion, Forms, Razorpay, Discord and a YouTube channel.</td><td>Rules checked, signup page live</td></tr>
+<tr><td>Weeks 3 to 4</td><td>Publish 4 to 6 videos. Run 2 free webinars (Sanhita leads). Reach out to 20 college clubs.</td><td>200+ interested signups</td></tr>
+<tr><td>Weeks 5 to 10</td><td>Run the pilot cohort with 20 to 30 students. Weekly live class, weekly team review.</td><td>At least 70% of teams submit a report</td></tr>
+<tr><td>Weeks 11 to 12</td><td>Demo day. Post the best reports (arXiv or a workshop submission where suitable). Collect testimonials. Help students apply to summer research internships. Set the price for cohort 2.</td><td>Testimonials, applications sent, price decided</td></tr>
+</table>
+<p><b>Numbers to track:</b> signups, paid conversion, completion rate, reports finished, internship applications sent, interviews and offers students get, and how likely students are to recommend you.</p>
+
+<h2>7. Scaling from two people</h2>
+<table>
+<tr><th style="width:20%">Stage</th><th>Team</th><th>What changes</th></tr>
+<tr><td>0 to 6 months</td><td>The two of you</td><td>1 to 2 cohorts, one track, no-code tools, prove students finish and get results.</td></tr>
+<tr><td>6 to 18 months</td><td>+ 3 to 5 alumni TAs, part-time editor</td><td>2 to 3 tracks (vision/OCR, NLP, GenAI and agents), your own website, college partnerships, register the company and apply to incubators (your IIT's incubator, Startup India).</td></tr>
+<tr><td>18 months and beyond</td><td>+ paid mentor network of PhD students across institutes</td><td>Mentors paid per student, B2B programs for colleges and companies, AI feedback tools, many cohorts running at once.</td></tr>
+</table>
+<p><b>Key idea:</b> the business grows by turning your best students into TAs and recruiting other PhD students as paid mentors. That is how a two-person team becomes a hundred-mentor network without losing quality.</p>
+
+<h2>8. Risks and rules to check</h2>
+<div class="warn">
+<ul>
+<li><b>PhD rules.</b> Many institutes have rules on outside work, stipends and startups for PhD scholars. Check yours and talk to your advisor and incubator before charging money.</li>
+<li><b>IIT name and logo.</b> Don't use them in branding. You can state facts, like "founded by IIT researchers".</li>
+<li><b>No placement guarantees.</b> Promise preparation and support, never seats.</li>
+<li><b>Research ethics.</b> Students must do their own work. Use only public or properly licensed datasets, especially for identity documents.</li>
+<li><b>Time.</b> Two founders with PhDs can burn out. Cap cohort size until TAs exist.</li>
+</ul>
+</div>
+
+<h2>9. A short note on balancing</h2>
+<p>Give each thing a fixed slot instead of fitting it in when you can. For example, GATE and exam prep in the morning, startup work in the evening, and one fixed weekend block for recording. Your YouTube channel and the startup should be the same effort: every video you record for the course is also YouTube content. Review the week every Sunday and cut whatever isn't moving students forward.</p>
+
+<h2>Sources</h2>
+<p class="sub">
+SRIP at IIT Gandhinagar: education.vikaspedia.in (summer research internship program at IIT Gandhinagar) ·
+IIT Mandi summer internship 2026: news.careers360.com ·
+GRISHMA UG internship, IIT Kharagpur: kriti.iitkgp.ac.in/programs/grishma ·
+RISE UP internship, IIT Jammu: eduadvice.in ·
+ACM iKDD Uplink Internship 2026: ikdd.acm.org/uplink-2026.php ·
+Masai School and IIT Roorkee EICT AI/ML program: masaischool.com/iit-roorkee-eict/ai-ml ·
+Intellipaat and iHUB IIT Roorkee program: intellipaat.com/ai-data-science-from-ihub-iit-roorkee-prime ·
+IIT certificate AI courses compared (2026): masaischool.com/blog.
+</p>
+</body></html>
