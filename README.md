@@ -19,6 +19,9 @@ We help students make their next big leap in AI, research and careers. We start 
 | [docs/03-founder-roles.md](docs/03-founder-roles.md) | Who owns what, how to be better founders, weekly rhythm |
 | [docs/04-niche-markets-and-pricing.md](docs/04-niche-markets-and-pricing.md) | Five niches to target and the pricing ladder |
 | [docs/05-learning-roadmap-sanhita.md](docs/05-learning-roadmap-sanhita.md) | What Sanhita learns: web for the startup and the path to AI scientist |
+| [docs/06-website-and-app-launch.md](docs/06-website-and-app-launch.md) | How to put the website online and publish the Android app on the Play Store |
+| [website/](website/) | The Leapverse website, installable as an app (open `website/index.html` to preview) |
+| [android/](android/) | Android app settings (`twa-manifest.json`) and Play Store images |
 | [assets/mind-map-v2.png](assets/mind-map-v2.png) | Mind map v2: objective, niches, pricing, founders, growth (also `.svg`) |
 | [assets/mind-map-v1.png](assets/mind-map-v1.png) | Mind map v1 from the first plan |
 | [brand/](brand/) | Logo (made by `source/make-logo.py`): `logo-full.svg/png` (icon and name), `logo-icon.svg/png` (icon only) |
@@ -30,9 +33,9 @@ We help students make their next big leap in AI, research and careers. We start 
 
 - Folders: `docs/` for writing, `assets/` for diagrams and images, `brand/` for the logo, `exports/` for PDFs and shareable images, `source/` for files that generate exports.
 - Files are lowercase with hyphens, for example `learning-roadmap-sanhita.md`.
-- Docs are numbered in reading order: `01-` to `05-`. Add new ones as `06-...`, `07-...`.
+- Docs are numbered in reading order: `01-` to `06-`. Add new ones as `07-...`, `08-...`.
 - Versioned files end in `-v1`, `-v2` and so on. Keep old versions; add a new one when something changes.
 
 To update the mind map, edit the list in `source/make-mind-map-v2.py` and run `python3 source/make-mind-map-v2.py`.
 
-Suggested next files: `docs/06-pilot-course-outline.md`, `docs/07-student-interview-notes.md`, `docs/08-founders-agreement-notes.md`.
+Suggested next files: `docs/07-pilot-course-outline.md`, `docs/08-student-interview-notes.md`, `docs/09-founders-agreement-notes.md`.
