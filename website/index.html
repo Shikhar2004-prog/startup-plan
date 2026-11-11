@@ -7,7 +7,7 @@
 <meta name="description" content="Leapverse runs mentored AI research projects led by IIT researchers. Build a real project, a paper-style report and a talk, and apply for research internships, MS/PhD and AI jobs with proof.">
 <meta name="theme-color" content="#0b1530">
 <meta property="og:title" content="Leapverse: leap into AI, research and beyond">
-<meta property="og:description" content="Mentored AI research projects led by IIT researchers. Start with the 6-week Document AI Research Track.">
+<meta property="og:description" content="Mentored AI research projects led by IIT researchers. Start with the 6-week AI Research Track on the latest in LLMs, agents and multimodal AI.">
 <meta property="og:image" content="assets/og-image.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -140,6 +140,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .facts{display:flex;flex-wrap:wrap;gap:8px}
 .facts span{font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid var(--ink-3);color:var(--text);background:rgba(255,255,255,.03)}
 .mini{display:grid;gap:16px}
+.areas span{font-size:14px;padding:8px 14px;border-color:rgba(127,231,201,.3);background:rgba(127,231,201,.06)}
 @media (max-width:860px){.tracks{grid-template-columns:1fr}.track.feature{grid-row:auto}}
 
 /* curriculum */
@@ -318,9 +319,9 @@ footer a:hover{color:var(--text)}
   <section class="hero" aria-label="Introduction">
     <canvas id="sky" aria-hidden="true"></canvas>
     <div class="wrap">
-      <a class="pill" href="#apply"><b>Pilot</b>Document AI Research Track · 6 weeks · applications open</a>
+      <a class="pill" href="#apply"><b>Pilot</b>AI Research Track · 6 weeks · applications open</a>
       <h1>Leap into <span class="grad">AI, research</span> and beyond.</h1>
-      <p class="lede">Do a real AI research project with mentors who are doing research right now. In six weeks you build working code, a paper-style report and a talk, then use them to apply for research internships, MS/PhD programs and AI jobs.</p>
+      <p class="lede">Work on the latest AI research, from LLMs and agents to multimodal models, with mentors who are doing research right now. In six weeks you build working code, a paper-style report and a talk, then use them to apply for research internships, MS/PhD programs and AI jobs.</p>
       <div class="hero-cta">
         <a class="btn btn-gold" href="#apply">Apply for the pilot<svg><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost" href="#curriculum">See the 6-week plan</a>
@@ -354,7 +355,7 @@ footer a:hover{color:var(--text)}
       <div class="who">
         <div class="who-card reveal"><span class="tag">Internships</span><h3>Research-internship applicants</h3><p>2nd and 3rd year students applying to programs like SRIP, GRISHMA, RISE UP, iKDD Uplink, MITACS or DAAD WISE who have no research to show yet.</p></div>
         <div class="who-card reveal"><span class="tag">Higher studies</span><h3>MS and PhD aspirants</h3><p>A real first project with mentor feedback, a paper draft and a talk, which is what admissions committees look for.</p></div>
-        <div class="who-card reveal"><span class="tag">Careers</span><h3>Future document-AI engineers</h3><p>Banking, fintech, insurance, govtech and legal tech need OCR and document AI that work on Indian documents.</p></div>
+        <div class="who-card reveal"><span class="tag">Careers</span><h3>Future AI engineers and scientists</h3><p>Teams building with LLMs and agents hire people who can read new papers, run careful experiments and explain their results.</p></div>
         <div class="who-card reveal"><span class="tag">Colleges</span><h3>Final-year project batches</h3><p>A guided research-project program for a whole batch, or a 2-day intro to AI research workshop.</p></div>
       </div>
     </div>
@@ -366,14 +367,16 @@ footer a:hover{color:var(--text)}
       <div class="sec-head reveal">
         <span class="eyebrow">Courses</span>
         <h2>Start with one track. <span class="grad">Grow into the universe.</span></h2>
+        <p class="lede">We teach what the field is working on now. Research areas for the current cohort:</p>
+        <div class="facts areas"><span>Large language models</span><span>AI agents and tool use</span><span>Retrieval and RAG</span><span>Vision-language and multimodal AI</span><span>Efficient fine-tuning (LoRA)</span><span>Evaluation and benchmarks</span><span>AI safety and reliability</span><span>Generative models</span></div>
       </div>
       <div class="tracks">
         <article class="track feature reveal">
           <span class="status open">Pilot · applications open</span>
-          <h3>Document AI Research Track</h3>
-          <p>Build AI that reads real Indian documents: OCR on Hindi and multi-script forms, spotting tampered documents, pulling tables out of scans. Generic OCR often fails on these, so there is real research to do and real demand for people who can do it.</p>
+          <h3>AI Research Track</h3>
+          <p>Pick a problem from the latest AI research and take it from paper to results. Topics follow what the field is working on now: large language models, retrieval and RAG, AI agents, vision-language models, efficient fine-tuning and model evaluation. Topics are refreshed every cohort, so you always work on current research.</p>
           <div class="facts"><span>6 weeks</span><span>Live weekly class</span><span>Weekly mentor review</span><span>Team project</span><span>Demo day</span></div>
-          <p>Tools you will use: Python, PyTorch, Hugging Face, OpenCV, Tesseract, PaddleOCR, TrOCR, Donut and LayoutLM-style models, GitHub, Colab and Overleaf.</p>
+          <p>Tools you will use: Python, PyTorch, Hugging Face Transformers and PEFT, open LLMs and vision-language models, vector search, Weights &amp; Biases, GitHub, Colab and Overleaf.</p>
           <div><a class="btn btn-gold" href="#apply">Apply for the pilot<svg><use href="#i-arrow"/></svg></a></div>
         </article>
         <div class="mini">
@@ -405,9 +408,9 @@ footer a:hover{color:var(--text)}
         <h2>Six weeks from zero research to a finished project.</h2>
         <p class="lede">Every week ends with something you can see: a running baseline, a results table, a draft, a talk.</p>
         <div class="projects" aria-label="Example projects">
-          <div><svg><use href="#i-star"/></svg><span>OCR on Hindi and multi-script government forms</span></div>
-          <div><svg><use href="#i-star"/></svg><span>Detecting tampered or edited documents</span></div>
-          <div><svg><use href="#i-star"/></svg><span>Extracting tables from scanned documents</span></div>
+          <div><svg><use href="#i-star"/></svg><span>Do LLMs reason as well in Indian languages as in English? Build a benchmark and test it</span></div>
+          <div><svg><use href="#i-star"/></svg><span>Make a RAG system hallucinate less, and measure it</span></div>
+          <div><svg><use href="#i-star"/></svg><span>Fine-tune a small open model with LoRA to match a much larger one on one task</span></div>
         </div>
         <p class="note">Pilot outline. Topics may shift a little as we learn from the first cohort.</p>
       </div>
@@ -422,14 +425,14 @@ footer a:hover{color:var(--text)}
         <details class="week reveal">
           <summary><span class="wk">WEEK 2</span><h3>The problem and a baseline</h3><span class="chev"><svg><use href="#i-plus"/></svg></span></summary>
           <div class="body">
-            <ul><li>Public and licensed datasets only, and why that matters for identity documents</li><li>Run classic OCR baselines (Tesseract, PaddleOCR)</li><li>Evaluation: character and word error rates, honest test splits</li></ul>
+            <ul><li>Find and read the 3 to 5 recent papers closest to your problem</li><li>Reproduce a published baseline with an open model, using public datasets only</li><li>Evaluation: the right metrics, honest test splits, no leakage</li></ul>
             <p class="out"><b>Output</b>A working baseline with numbers on the shared leaderboard</p>
           </div>
         </details>
         <details class="week reveal">
-          <summary><span class="wk">WEEK 3</span><h3>Modern document AI models</h3><span class="chev"><svg><use href="#i-plus"/></svg></span></summary>
+          <summary><span class="wk">WEEK 3</span><h3>Frontier models and methods</h3><span class="chev"><svg><use href="#i-plus"/></svg></span></summary>
           <div class="body">
-            <ul><li>Transformer OCR and document models: TrOCR, Donut, LayoutLM-style models</li><li>Fine-tuning on your dataset with Hugging Face</li><li>Reading the results, not just the score</li></ul>
+            <ul><li>How today's models work: transformers, LLMs, vision-language models</li><li>The methods you will use: prompting, RAG, agents and tool use, LoRA fine-tuning</li><li>Reading the results, not just the score</li></ul>
             <p class="out"><b>Output</b>A model that beats your baseline, or a clear reason why it doesn't</p>
           </div>
         </details>
@@ -495,7 +498,7 @@ footer a:hover{color:var(--text)}
       <div class="sec-head reveal">
         <span class="eyebrow">Founders</span>
         <h2>Taught by people doing the research.</h2>
-        <p class="lede">Leapverse is founded by two IIT researchers heading into PhDs, who work on OCR and document verification and who love teaching it.</p>
+        <p class="lede">Leapverse is founded by two IIT researchers heading into PhDs, who follow the latest AI research closely and love teaching it.</p>
       </div>
       <div class="founders">
         <article class="founder reveal">
@@ -504,7 +507,7 @@ footer a:hover{color:var(--text)}
             <div><h3 style="font-size:26px">Shikhar Dubey</h3><div class="role">Co-founder · Academics and Content</div></div>
           </div>
           <ul>
-            <li><svg><use href="#i-check"/></svg><span>Researcher in OCR and document verification</span></li>
+            <li><svg><use href="#i-check"/></svg><span>AI researcher in computer vision</span></li>
             <li><svg><use href="#i-check"/></svg><span>Presented a research portfolio at IIT Bombay</span></li>
             <li><svg><use href="#i-check"/></svg><span>Workshop speaker at ICVGIP, India's computer vision and graphics conference</span></li>
             <li><svg><use href="#i-check"/></svg><span><span class="todo">Add: degree, institute and PhD plans</span></span></li>
@@ -519,7 +522,7 @@ footer a:hover{color:var(--text)}
             <div><h3 style="font-size:26px">Sanhita Saxena</h3><div class="role">Co-founder · Product and Growth</div></div>
           </div>
           <ul>
-            <li><svg><use href="#i-check"/></svg><span>Researcher in OCR and document verification</span></li>
+            <li><svg><use href="#i-check"/></svg><span>AI researcher in computer vision</span></li>
             <li><svg><use href="#i-check"/></svg><span>Web developer who builds the Leapverse platform</span></li>
             <li><svg><use href="#i-check"/></svg><span>Ran many seminars during BTech</span></li>
             <li><svg><use href="#i-check"/></svg><span><span class="todo">Add: degree, institute and PhD plans</span></span></li>
@@ -543,7 +546,7 @@ footer a:hover{color:var(--text)}
       <div class="prices">
         <div class="price reveal"><span class="lvl">Free</span><div class="amt">₹0</div><ul><li>YouTube lessons</li><li>Live webinars on research internships</li><li>"How to read a paper" guide</li></ul></div>
         <div class="price reveal"><span class="lvl">Starter</span><div class="amt">₹499<small> onwards</small></div><ul><li>Paper-reading bootcamp</li><li>Recorded, 1 to 2 weeks</li><li>Go at your own pace</li></ul></div>
-        <div class="price hot reveal"><span class="lvl">Pilot cohort</span><div class="amt">₹2,999<small> onwards</small></div><ul><li>6-week Document AI Research Track</li><li>Live classes and team project</li><li>Weekly mentor review, demo day</li></ul><a class="btn btn-gold" href="#apply">Apply</a></div>
+        <div class="price hot reveal"><span class="lvl">Pilot cohort</span><div class="amt">₹2,999<small> onwards</small></div><ul><li>6-week AI Research Track</li><li>Live classes and team project</li><li>Weekly mentor review, demo day</li></ul><a class="btn btn-gold" href="#apply">Apply</a></div>
         <div class="price reveal"><span class="lvl">Add-ons</span><div class="amt">₹499<small> onwards</small></div><ul><li>Research CV review</li><li>Mock research interview</li><li>Paper review</li></ul></div>
       </div>
     </div>
@@ -585,7 +588,7 @@ footer a:hover{color:var(--text)}
           <div class="field"><label for="f-year">Year of study</label>
             <select id="f-year" name="year"><option>1st year</option><option selected>2nd year</option><option>3rd year</option><option>4th year</option><option>Graduate</option><option>Other</option></select></div>
           <div class="field"><label for="f-goal">I'm interested in</label>
-            <select id="f-goal" name="goal"><option>Pilot: Document AI Research Track</option><option>Research internships</option><option>MS / PhD admissions</option><option>GATE DA, applied</option><option>My college (workshops or batch program)</option></select></div>
+            <select id="f-goal" name="goal"><option>Pilot: AI Research Track</option><option>Research internships</option><option>MS / PhD admissions</option><option>GATE DA, applied</option><option>My college (workshops or batch program)</option></select></div>
           <div class="field full"><label for="f-msg">Anything else? (optional)</label><textarea id="f-msg" name="message"></textarea></div>
           <div class="field full"><button class="btn btn-gold" type="submit"><svg><use href="#i-send"/></svg>Send my application</button></div>
           <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>

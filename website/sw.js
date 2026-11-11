@@ -1,6 +1,6 @@
 // Leapverse service worker: makes the site installable and usable offline.
 // Bump VERSION whenever you change files so phones pick up the new site.
-const VERSION = "leapverse-v1";
+const VERSION = "leapverse-v2";
 const CORE = ["./", "index.html", "privacy.html", "manifest.webmanifest", "assets/icon.svg", "assets/icon-192.png", "assets/icon-512.png"];
 
 self.addEventListener("install", e => {

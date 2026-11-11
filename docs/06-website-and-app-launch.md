@@ -12,7 +12,7 @@ Written 11 November 2026. The website lives in [`website/`](../website/). The An
 | Auto-deploy to GitHub Pages | `.github/workflows/deploy-website.yml` | Ready, runs when `website/` changes on `main` |
 | Android app settings for Bubblewrap | `android/twa-manifest.json` | Ready. Package name `com.leapverse.app` |
 | Play Store images: icon 512×512, feature graphic 1024×500, 5 phone screenshots | `android/store-listing/` | Ready |
-| Digital Asset Links file (removes the browser bar in the app) | `website/.well-known/assetlinks.json` | Needs your key fingerprint (step 4) |
+| Digital Asset Links file (removes the browser bar in the app) | `website/.well-known/assetlinks.json` | Needs a custom domain and your key fingerprint (step 4) |
 
 ## Before you go public: fill in these
 
@@ -23,16 +23,16 @@ Written 11 November 2026. The website lives in [`website/`](../website/). The An
 
 ## Step 1: put the website online (free)
 
-**Recommended: a separate public repository for the website.** It keeps this plan repository private, and gives you the root address `https://shikhar2004-prog.github.io/`, which the Android app needs (step 4).
+Everything is hosted from this repository. The site address will be `https://shikhar2004-prog.github.io/startup-plan/`.
 
-1. On GitHub, create a new **public** repository named exactly `Shikhar2004-prog.github.io`.
-2. Add it to this Claude project (Project settings, Repositories) and ask Claude to publish the `website/` folder to it. Or copy the contents of `website/` (including the hidden `.nojekyll` and `.well-known` folder) into it yourself.
-3. In that repository: **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / root → Save.**
-4. After about a minute the site is live at `https://shikhar2004-prog.github.io/`.
+1. **Merge the pull request** that adds `website/` into `main`.
+2. **Allow GitHub Pages on this repository.** It is private, and GitHub only hosts private repositories on a paid plan. Pick one:
+   - **GitHub Pro, free for students (recommended):** apply for the [GitHub Student Developer Pack](https://education.github.com/pack) with your institute email. The repository stays private, so the plan and pricing docs stay hidden, and only the website is public.
+   - **Make the repository public:** Settings → General → Danger Zone → Change visibility → Public. This is instant, but everyone can then read the plan, pricing and strategy docs too.
+3. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
+4. Open the **Actions** tab, choose **Deploy website**, and click **Run workflow** (it also runs by itself whenever `website/` changes on `main`). After about a minute the site is live.
 
-Other options:
-- **Keep it in this repository:** make this repository public, or get GitHub Pro (free with the GitHub Student Developer Pack). Then **Settings → Pages → Source: GitHub Actions**. The workflow publishes to `https://shikhar2004-prog.github.io/startup-plan/`. The app then needs a custom domain for step 4.
-- **Your own domain (for example leapverse.in):** buy it (check it's free first), then in the repository's **Settings → Pages → Custom domain**, enter it and add the DNS records GitHub shows. If you do this, change `host` in `android/twa-manifest.json` to the new domain.
+**Your own domain later (for example leapverse.in):** buy it, then in Settings → Pages → Custom domain, enter it and add the DNS records GitHub shows. Then change `host`, `startUrl`, `iconUrl`, `maskableIconUrl` and `webManifestUrl` in `android/twa-manifest.json` to the new domain.
 
 ## Step 2: Google Play developer account
 
@@ -59,19 +59,19 @@ Other options:
 ```bash
 npm install -g @bubblewrap/cli
 mkdir leapverse-android && cd leapverse-android
-bubblewrap init --manifest https://shikhar2004-prog.github.io/manifest.webmanifest
+bubblewrap init --manifest https://shikhar2004-prog.github.io/startup-plan/manifest.webmanifest
 # accept the defaults; use package id com.leapverse.app (as in android/twa-manifest.json)
 bubblewrap build
 # gives you app-release-bundle.aab and app-release-signed.apk
 ```
 
-## Step 4: remove the browser bar (Digital Asset Links)
+## Step 4: remove the browser bar (needs your own domain)
 
-Without this step the app still works, but shows a small browser address bar at the top.
+The app works without this step, but shows a thin browser address bar at the top. Android only hides that bar when a file called `assetlinks.json` sits at the very root of the website's domain. A site at `shikhar2004-prog.github.io/startup-plan/` cannot put a file at the root, so this step needs a custom domain (see step 1). You can publish the app first and do this later.
 
 1. After you upload the app (step 5), open Play Console → your app → **Test and release → App integrity → App signing**. Copy the **SHA-256 certificate fingerprint** of the *App signing key*.
 2. In `website/.well-known/assetlinks.json`, replace `REPLACE_WITH_SHA256_FINGERPRINT_FROM_PLAY_CONSOLE` with it. Also add the fingerprint from your own upload key (it's in PWABuilder's `assetlinks.json`), so the list has both, separated by a comma.
-3. Publish the website again. Check that `https://shikhar2004-prog.github.io/.well-known/assetlinks.json` opens in a browser.
+3. Publish the website again. Check that `https://your-domain/.well-known/assetlinks.json` opens in a browser.
 
 ## Step 5: create the app in Play Console and upload
 
@@ -81,7 +81,7 @@ Without this step the app still works, but shows a small browser address bar at 
    - Feature graphic: `feature-graphic-1024x500.png`
    - Phone screenshots: the `phone-screenshot-*.png` files (add one of the founders section after you fill in your details)
 3. **App content** (Policy → App content), answer each item:
-   - Privacy policy URL: `https://shikhar2004-prog.github.io/privacy.html`
+   - Privacy policy URL: `https://shikhar2004-prog.github.io/startup-plan/privacy.html`
    - Ads: No ads
    - App access: All functionality is available without special access
    - Content rating: fill the questionnaire (category: Education). Expect a rating for everyone
@@ -102,13 +102,13 @@ Mentored AI research projects for students. Build real work, not certificates.
 
 Leapverse helps college students make their next big leap in AI, research and careers.
 
-Do a real AI research project with mentors who are doing research right now. In six weeks you build working code, a paper-style report and a talk, then use them to apply for research internships, MS/PhD programs and AI jobs.
+Work on the latest AI research, from LLMs and agents to multimodal models, with mentors who are doing research right now. In six weeks you build working code, a paper-style report and a talk, then use them to apply for research internships, MS/PhD programs and AI jobs.
 
-START WITH THE DOCUMENT AI RESEARCH TRACK (PILOT)
+START WITH THE AI RESEARCH TRACK (PILOT)
 • 6 weeks, live online classes, recorded for rewatching
 • Teams of 2 to 3 students, weekly mentor review
-• Real problems: OCR on Hindi and multi-script forms, spotting tampered documents, extracting tables from scans
-• Tools: Python, PyTorch, Hugging Face, OpenCV, Tesseract, PaddleOCR, TrOCR, Donut, GitHub, Colab, Overleaf
+• Problems from the latest AI research: large language models, AI agents, RAG, vision-language models, fine-tuning and evaluation
+• Tools: Python, PyTorch, Hugging Face, open LLMs, vector search, GitHub, Colab, Overleaf
 
 WHAT YOU LEAVE WITH
 • A public GitHub project
@@ -119,7 +119,7 @@ WHAT YOU LEAVE WITH
 WHO IT'S FOR
 • Students applying for research internships
 • MS and PhD aspirants
-• Students who want careers in document AI for banking, fintech, insurance and govtech
+• Students who want careers as AI engineers and scientists
 • Colleges looking for guided final-year research projects
 
 You need basic Python. No research experience needed.
@@ -130,5 +130,5 @@ We never promise placements. We help you build work you can show.
 
 ## Updating later
 
-- **Website and app content:** edit `website/`, merge to `main` (or push to the website repository). The app shows the new content automatically. Bump `VERSION` in `website/sw.js` so phones drop the old cached copy.
+- **Website and app content:** edit `website/` and merge to `main`. The app shows the new content automatically. Bump `VERSION` in `website/sw.js` so phones drop the old cached copy.
 - **App itself** (icon, name, package settings): rebuild with the same signing key, raise the version code by 1, upload a new release.
