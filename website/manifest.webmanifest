@@ -1,0 +1,24 @@
+{
+  "name": "Leapverse",
+  "short_name": "Leapverse",
+  "description": "Mentored AI research projects led by IIT researchers. Leap into AI, research and beyond.",
+  "id": "./",
+  "start_url": "./?source=app",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1530",
+  "theme_color": "#0b1530",
+  "categories": ["education"],
+  "lang": "en",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Courses", "url": "./#tracks", "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Apply", "url": "./#apply", "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
