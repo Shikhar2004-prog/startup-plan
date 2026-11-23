@@ -177,6 +177,7 @@ function deck({ day, short }) {
     const iw = iw0 * k, ih = ih0 * k;
     s.addImage({ path: file, x: x + (w - iw) / 2, y: y + (h - ih) / 2, w: iw, h: ih });
   }
+  const ttl = (s, title) => s.addText(title, { placeholder: "title", ...(title.length > 54 ? { fontSize: 25 } : {}) });
   const tx = (src, o = {}) => R.tex(src, o);
   const txw = (src, o = {}) => R.tex(src, { ...o, color: "#FFFFFF" });
   api.T = T; api.card = card; api.badge = badge; api.fit = fit; api.num = num;
@@ -207,7 +208,7 @@ function deck({ day, short }) {
 
   api.objectives = ({ title = "Today's goals", goals, why, prereq, notes }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const n = goals.length, rh = Math.min(0.85, 4.3 / n);
       goals.forEach((g, i) => {
         const y = Y0 + 0.05 + i * rh;
@@ -241,7 +242,7 @@ function deck({ day, short }) {
   api.divider = ({ kicker, title, sub, notes }) => {
     add("Section", async (s) => {
       T(s, kicker.toUpperCase(), { x: 1.2, y: 2.4, w: 8, h: 0.4, fontSize: 15, bold: true, color: C.accent3, charSpacing: 3 });
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       if (sub) s.addText(sub, { placeholder: "body" });
       if (notes) s.addNotes(notes);
     });
@@ -250,7 +251,7 @@ function deck({ day, short }) {
   api.concept = ({ title, intuition, def, defLabel = "Formal definition", defNote, notes, eqSize = 26 }) => {
     const e = def && txw(def, { size: eqSize });
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       card(s, X0, Y0, 5.85, 5.2, HEX.panel);
       await badge(s, X0 + 0.3, Y0 + 0.3, 0.5, "bulb", HEX.gold, HEX.navy);
       T(s, "Intuition", { x: X0 + 0.95, y: Y0 + 0.3, w: 4, h: 0.5, fontSize: 18, bold: true, color: C.text1, valign: "middle" });
@@ -269,7 +270,7 @@ function deck({ day, short }) {
     const e = tx(eq, { size: eqSize });
     const L = legend.map(([t, m]) => [tx(t, { size: 20, display: false }), m]);
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       card(s, X0, Y0, X1 - X0, 2.05, HEX.panel);
       fit(s, e, X0 + 0.3, Y0 + 0.15, X1 - X0 - 0.6, 1.75);
       const cols = L.length > 3 ? 2 : 1, rows = Math.ceil(L.length / cols);
@@ -292,7 +293,7 @@ function deck({ day, short }) {
     const pe = problemEq && tx(problemEq, { size: 22 });
     const S = steps.map((st) => ({ img: tx(st.eq, { size: stepSize }), note: st.note }));
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       card(s, X0, Y0, 3.85, 5.3, HEX.panel);
       await badge(s, X0 + 0.25, Y0 + 0.25, 0.48, "pen", HEX.blue);
       T(s, "Worked example", { x: X0 + 0.85, y: Y0 + 0.25, w: 2.9, h: 0.48, fontSize: 16, bold: true, color: C.text1, valign: "middle" });
@@ -318,7 +319,7 @@ function deck({ day, short }) {
   // fig = { file, w, h } (inches, aspect) from figures.py, or a rendered html() image
   api.figure = ({ title, fig, points = [], caption, notes, wide }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const fw = wide || !points.length ? X1 - X0 : 7.35;
       const fh = caption ? 4.85 : 5.25;
       if (fig.path) fit(s, fig, X0, Y0, fw, fh, { maxScale: 3 });
@@ -342,7 +343,7 @@ function deck({ day, short }) {
   // Full-width diagram with optional takeaway chips beneath
   api.diagram = ({ title, diag, chips = [], notes }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const dh = chips.length ? 3.95 : 5.25;
       fit(s, diag, X0, Y0, X1 - X0, dh, { maxScale: 3 });
       if (chips.length) {
@@ -361,7 +362,7 @@ function deck({ day, short }) {
   api.compare = ({ title, cols, notes, foot }) => {
     const E = cols.map((c) => c.eq && tx(c.eq, { size: c.eqSize || 22 }));
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const n = cols.length, gap = 0.3, cw = (X1 - X0 - gap * (n - 1)) / n, ch = foot ? 4.45 : 5.25;
       const colors = [HEX.green, HEX.blue, HEX.violet, HEX.coral];
       for (let i = 0; i < n; i++) {
@@ -383,7 +384,7 @@ function deck({ day, short }) {
 
   api.code = ({ title, code, points = [], notes, fontSize = 13 }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       card(s, X0, Y0, 7.4, 5.25, "0E1A38");
       const lines = code.replace(/\n$/, "").split("\n");
       T(s, lines.map((l, i) => ({ text: l || " ", options: { breakLine: i < lines.length - 1, color: l.trim().startsWith("#") ? HEX.mint : "E8EEF7" } })),
@@ -401,7 +402,7 @@ function deck({ day, short }) {
   api.paper = ({ title = "How it looks in a research paper", rows, notes }) => {
     const E = rows.map((r) => tx(r.eq, { size: 20 }));
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const n = rows.length, rh = Math.min(1.35, 5.25 / n);
       T(s, "WRITTEN IN THE PAPER", { x: X0, y: Y0 - 0.05, w: 6, h: 0.3, fontSize: 11, bold: true, color: HEX.muted, charSpacing: 2 });
       T(s, "SAY IT OUT LOUD", { x: 7.7, y: Y0 - 0.05, w: 5, h: 0.3, fontSize: 11, bold: true, color: HEX.muted, charSpacing: 2 });
@@ -439,7 +440,7 @@ function deck({ day, short }) {
 
   api.recap = ({ points, next, nextTopics, notes, title = "Recap: what to remember" }) => {
     add("Dark content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const n = points.length, rh = Math.min(0.9, 5.2 / n);
       for (let i = 0; i < n; i++) {
         const y = Y0 + i * rh;
@@ -459,7 +460,7 @@ function deck({ day, short }) {
 
   api.rows = ({ title, rows, notes, cols = 1 }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const n = rows.length, per = Math.ceil(n / cols), gap = 0.3, cw = (X1 - X0 - gap * (cols - 1)) / cols, rh = Math.min(1.35, 5.3 / per);
       for (let i = 0; i < n; i++) {
         const c = Math.floor(i / per), r = i % per, x = X0 + c * (cw + gap), y = Y0 + r * rh;
@@ -475,7 +476,7 @@ function deck({ day, short }) {
 
   api.table = ({ title, head, rows, notes, colW, foot, fontSize = 14 }) => {
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       const hdr = head.map((h) => ({ text: h, options: { bold: true, color: C.background1, fill: { color: HEX.navy }, fontSize } }));
       const body = rows.map((r, i) => r.map((c) => ({ text: runs(c, { fontSize, color: HEX.navy }), options: { fill: { color: i % 2 ? HEX.white : HEX.panel } } })));
       s.addTable([hdr, ...body], { x: X0, y: Y0, w: X1 - X0, colW, border: { type: "solid", color: HEX.line, pt: 0.75 }, fontSize, color: C.text1, valign: "middle", margin: [5, 8, 5, 8] });
@@ -491,7 +492,7 @@ function deck({ day, short }) {
   api.big = ({ title, statement, eq, sub, notes }) => {
     const e = eq && tx(eq, { size: 40 });
     add("Content", async (s) => {
-      s.addText(title, { placeholder: "title" });
+      ttl(s, title);
       T(s, runs(statement), { x: 1.2, y: Y0 + 0.2, w: 10.9, h: 1.2, fontSize: 24, color: C.text1, align: "center", valign: "middle", fontFace: THEME.headFontFace });
       if (e) { card(s, 1.5, 3.05, 10.33, 2.1, HEX.panel); fit(s, e, 1.8, 3.15, 9.73, 1.9); }
       if (sub) T(s, runs(sub), { x: 1.5, y: 5.4, w: 10.33, h: 1.1, fontSize: 16, color: HEX.muted, align: "center", valign: "top" });

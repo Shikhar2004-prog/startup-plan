@@ -347,6 +347,248 @@ def _():
     return f
 
 
+
+# ------------------------------------------------------------------ Day 6
+@fig("d06_taylor")
+def _():
+    f_ = lambda x: np.exp(np.sin(x))
+    x = np.linspace(-1.5, 3.5, 400); a = 1.0
+    fa = f_(a); d1 = np.cos(a) * fa; d2 = (np.cos(a) ** 2 - np.sin(a)) * fa
+    f, ax = plt.subplots(figsize=(9, 5.4))
+    ax.plot(x, f_(x), color=BLUE, lw=3.5, label="$f(x)$")
+    ax.plot(x, fa + d1 * (x - a), color=CORAL, lw=2.5, ls="--", label="1st order: $f(a)+f'(a)(x-a)$")
+    ax.plot(x, fa + d1 * (x - a) + 0.5 * d2 * (x - a) ** 2, color=GREEN, lw=2.5, label="2nd order: $+\\frac{1}{2}f''(a)(x-a)^2$")
+    ax.scatter([a], [fa], color=NAVY, s=80, zorder=6); ax.text(a + 0.05, fa - 0.35, "$a$", fontsize=20)
+    ax.set_ylim(0, 3.5); ax.legend(loc="upper right", fontsize=14, frameon=True, facecolor="white")
+    ax.set_title("Taylor: a line, then a parabola, hugging the curve near $a$")
+    return f
+
+
+@fig("d06_critical")
+def _():
+    f = plt.figure(figsize=(13, 4.4))
+    x, y = np.meshgrid(np.linspace(-2, 2, 60), np.linspace(-2, 2, 60))
+    cases = [("Minimum: $H$ positive definite", x ** 2 + y ** 2, "viridis"), ("Maximum: $H$ negative definite", -(x ** 2 + y ** 2), "magma"), ("Saddle: $H$ has $\\lambda>0$ and $\\lambda<0$", x ** 2 - y ** 2, "coolwarm")]
+    for i, (t, z, cm) in enumerate(cases):
+        ax = f.add_subplot(1, 3, i + 1, projection="3d")
+        ax.plot_surface(x, y, z, cmap=cm, alpha=0.85, linewidth=0)
+        ax.scatter([0], [0], [0], color=NAVY, s=60)
+        ax.set_title(t, fontsize=15); ax.set_xticks([]); ax.set_yticks([]); ax.set_zticks([])
+        ax.view_init(28, -50)
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 7
+@fig("d07_dists")
+def _():
+    from math import comb, factorial
+    f, axs = plt.subplots(1, 4, figsize=(15, 4.0))
+    axs[0].bar(["0", "1"], [0.3, 0.7], color=[MUTED, BLUE]); axs[0].set_title("Bernoulli($p=0.7$)")
+    axs[1].bar(["cat", "dog", "car", "sky"], [0.55, 0.3, 0.1, 0.05], color=CYCLE[:4]); axs[1].set_title("Categorical (softmax output)")
+    k = np.arange(0, 11); axs[2].bar(k, [comb(10, i) * 0.3 ** i * 0.7 ** (10 - i) for i in k], color=GREEN); axs[2].set_title("Binomial($n=10,p=0.3$)")
+    x = np.linspace(-4, 6, 400)
+    for m, sd, c in ((0, 1, BLUE), (2, 0.6, CORAL), (1, 2, VIOLET)):
+        axs[3].plot(x, np.exp(-(x - m) ** 2 / (2 * sd * sd)) / (sd * np.sqrt(2 * np.pi)), color=c, label=f"$\\mu={m},\\sigma={sd}$")
+    axs[3].legend(fontsize=12); axs[3].set_title("Gaussian $\\mathcal{N}(\\mu,\\sigma^2)$")
+    f.tight_layout()
+    return f
+
+
+@fig("d07_joint")
+def _():
+    rng = np.random.default_rng(1)
+    X = rng.multivariate_normal([0, 0], [[1, 0.7], [0.7, 1]], 4000)
+    f = plt.figure(figsize=(7, 6.2))
+    gs = f.add_gridspec(4, 4, hspace=0.05, wspace=0.05)
+    ax = f.add_subplot(gs[1:, :3]); ax.hexbin(X[:, 0], X[:, 1], gridsize=30, cmap="Blues", mincnt=1)
+    ax.axvline(1.0, color=CORAL, lw=2.5); ax.text(1.08, -3.2, "condition on $x=1$", color=CORAL, fontsize=14)
+    ax.set_xlabel("$x$"); ax.set_ylabel("$y$"); ax.set_xlim(-3.5, 3.5); ax.set_ylim(-3.5, 3.5)
+    ax2 = f.add_subplot(gs[0, :3], sharex=ax); ax2.hist(X[:, 0], 40, color=GREEN, alpha=0.8); ax2.set_title("joint $p(x,y)$ with marginals $p(x)$, $p(y)$"); ax2.axis("off")
+    ax3 = f.add_subplot(gs[1:, 3], sharey=ax); ax3.hist(X[:, 1], 40, orientation="horizontal", color=VIOLET, alpha=0.8); ax3.axis("off")
+    return f
+
+
+# ------------------------------------------------------------------ Day 8
+@fig("d08_gauss2d")
+def _():
+    f, axs = plt.subplots(1, 3, figsize=(13, 4.4))
+    rng = np.random.default_rng(0)
+    for ax, C, t in zip(axs, [[[1, 0], [0, 1]], [[2.5, 0], [0, 0.4]], [[1, 0.85], [0.85, 1]]], ["$\\Sigma=I$ (independent)", "diagonal, unequal variances", "correlated, $\\rho=0.85$"]):
+        X = rng.multivariate_normal([0, 0], C, 600); ax.scatter(X[:, 0], X[:, 1], s=8, color=BLUE, alpha=0.4)
+        w, V = np.linalg.eigh(C)
+        for k in (1, 2):
+            ang = np.degrees(np.arctan2(V[1, 1], V[0, 1]))
+            ax.add_patch(Ellipse((0, 0), 2 * k * np.sqrt(w[1]), 2 * k * np.sqrt(w[0]), angle=ang, fill=False, color=CORAL, lw=2))
+        ax.set_xlim(-4.5, 4.5); ax.set_ylim(-4.5, 4.5); ax.set_aspect("equal"); ax.set_title(t)
+    f.tight_layout()
+    return f
+
+
+@fig("d08_clt")
+def _():
+    rng = np.random.default_rng(2)
+    f, axs = plt.subplots(1, 4, figsize=(15, 3.9))
+    for ax, n in zip(axs, [1, 2, 5, 30]):
+        m = rng.exponential(1.0, (20000, n)).mean(1)
+        ax.hist(m, bins=60, density=True, color=GREEN, alpha=0.75)
+        x = np.linspace(0, 4, 300); sd = 1 / np.sqrt(n)
+        if n >= 5: ax.plot(x, np.exp(-(x - 1) ** 2 / (2 * sd * sd)) / (sd * np.sqrt(2 * np.pi)), color=CORAL, lw=2.5)
+        ax.set_xlim(0, 4); ax.set_title(f"mean of $n={n}$ samples")
+    f.tight_layout()
+    return f
+
+
+@fig("d08_mle")
+def _():
+    p = np.linspace(0.001, 0.999, 400); k, n = 7, 10
+    f, (a, b) = plt.subplots(1, 2, figsize=(12, 4.6))
+    L = p ** k * (1 - p) ** (n - k)
+    a.plot(p, L, color=BLUE); a.axvline(0.7, color=CORAL, ls="--", lw=2); a.set_title("Likelihood $L(p)=p^7(1-p)^3$"); a.set_xlabel("$p$")
+    a.text(0.4, L.max() * 0.9, "$\\hat p=0.7$", color=CORAL, fontsize=18)
+    b.plot(p, np.log(L), color=GREEN); b.axvline(0.7, color=CORAL, ls="--", lw=2); b.set_ylim(-20, 0); b.set_title("Log-likelihood: same peak, easier math"); b.set_xlabel("$p$")
+    f.tight_layout()
+    return f
+
+
+@fig("d08_biasvar")
+def _():
+    rng = np.random.default_rng(4)
+    x = np.sort(rng.uniform(0, 1, 15)); y = np.sin(2 * np.pi * x) + rng.normal(0, 0.25, 15)
+    xs = np.linspace(0, 1, 300)
+    f, axs = plt.subplots(1, 3, figsize=(14, 4.2))
+    for ax, deg, t in zip(axs, [1, 4, 14], ["Underfit (degree 1): high bias", "Just right (degree 4)", "Overfit (degree 14): high variance"]):
+        c = np.polyfit(x, y, deg); ax.plot(xs, np.sin(2 * np.pi * xs), color=MUTED, lw=1.5, ls="--")
+        ax.plot(xs, np.polyval(c, xs), color=CORAL if deg != 4 else GREEN); ax.scatter(x, y, color=BLUE, zorder=5)
+        ax.set_ylim(-1.8, 1.8); ax.set_title(t, fontsize=15)
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 9
+@fig("d09_entropy")
+def _():
+    p = np.linspace(0.001, 0.999, 400); H = -p * np.log2(p) - (1 - p) * np.log2(1 - p)
+    f, (a, b) = plt.subplots(1, 2, figsize=(12, 4.6), gridspec_kw={"width_ratios": [1, 1.2]})
+    a.plot(p, H, color=VIOLET); a.set_xlabel("$p$ = P(heads)"); a.set_title("Entropy of a coin $H(p)$ in bits")
+    a.annotate("max surprise: 1 bit\nat a fair coin", xy=(0.5, 1), xytext=(0.55, 0.45), fontsize=14, color=NAVY, arrowprops=dict(arrowstyle="->", color=NAVY))
+    dists = {"peaked": [0.94, 0.02, 0.02, 0.02], "medium": [0.5, 0.3, 0.15, 0.05], "uniform": [0.25] * 4}
+    xs = np.arange(4); w = 0.26
+    for i, (k, v) in enumerate(dists.items()):
+        v = np.array(v); h = -(v * np.log2(v)).sum()
+        b.bar(xs + (i - 1) * w, v, w, color=[CORAL, GOLD, GREEN][i], label=f"{k}: H = {h:.2f} bits")
+    b.set_xticks(xs); b.set_xticklabels(["A", "B", "C", "D"]); b.legend(fontsize=13); b.set_title("Flatter distribution = higher entropy")
+    f.tight_layout()
+    return f
+
+
+@fig("d09_kl")
+def _():
+    x = np.linspace(-6, 8, 600)
+    N = lambda m, s: np.exp(-(x - m) ** 2 / (2 * s * s)) / (s * np.sqrt(2 * np.pi))
+    p = 0.5 * N(-1.5, 0.8) + 0.5 * N(2.5, 0.8)
+    f, axs = plt.subplots(1, 2, figsize=(13, 4.4))
+    axs[0].fill_between(x, p, color=BLUE, alpha=0.25); axs[0].plot(x, p, color=BLUE, label="data $p$")
+    axs[0].plot(x, N(0.5, 2.2), color=CORAL, label="$q$ fitted by forward KL$(p\\|q)$"); axs[0].set_title("Forward KL: mean-seeking, covers both modes"); axs[0].legend(fontsize=13)
+    axs[1].fill_between(x, p, color=BLUE, alpha=0.25); axs[1].plot(x, p, color=BLUE, label="data $p$")
+    axs[1].plot(x, 0.5 * N(2.5, 0.8) * 2, color=GREEN, label="$q$ fitted by reverse KL$(q\\|p)$"); axs[1].set_title("Reverse KL: mode-seeking, picks one mode"); axs[1].legend(fontsize=13)
+    f.tight_layout()
+    return f
+
+
+@fig("d09_temp")
+def _():
+    z = np.array([2.0, 1.0, 0.5, -1.0]); labels = ["Paris", "Lyon", "Nice", "Rome"]
+    f, axs = plt.subplots(1, 3, figsize=(13, 3.9), sharey=True)
+    for ax, T, c in zip(axs, [0.5, 1.0, 2.0], [CORAL, BLUE, GREEN]):
+        p = np.exp(z / T); p /= p.sum(); ax.bar(labels, p, color=c)
+        for i, v in enumerate(p): ax.text(i, v + 0.02, f"{v:.2f}", ha="center", fontsize=13, color=NAVY)
+        ax.set_title(f"temperature $T={T}$"); ax.set_ylim(0, 1)
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 10
+@fig("d10_convex")
+def _():
+    x = np.linspace(-2.5, 2.5, 400)
+    f, (a, b) = plt.subplots(1, 2, figsize=(12, 4.4))
+    a.plot(x, x ** 2 + 0.3, color=GREEN); a.plot([-2, 1.5], [4.3, 2.55], color=CORAL, lw=2, ls="--"); a.scatter([-2, 1.5], [4.3, 2.55], color=CORAL, zorder=5)
+    a.set_title("Convex: chord stays above, one global minimum")
+    y = 0.15 * x ** 4 - 0.8 * x ** 2 + 0.25 * x + 1.5
+    b.plot(x, y, color=CORAL); i1 = np.argmin(np.where(x < 0, y, 9)); i2 = np.argmin(np.where(x > 0, y, 9))
+    b.scatter([x[i1]], [y[i1]], color=GREEN, s=80, zorder=5); b.text(x[i1] - 0.5, y[i1] + 0.3, "global min", fontsize=14, color=GREEN)
+    b.scatter([x[i2]], [y[i2]], color=GOLD, s=80, zorder=5); b.text(x[i2] - 0.4, y[i2] + 0.3, "local min", fontsize=14, color=NAVY)
+    b.set_title("Non-convex (neural nets): many valleys")
+    f.tight_layout()
+    return f
+
+
+@fig("d10_lr")
+def _():
+    g = lambda x: x ** 2; dg = lambda x: 2 * x
+    x = np.linspace(-3.2, 3.2, 300)
+    f, axs = plt.subplots(1, 3, figsize=(14, 4.2))
+    for ax, eta, t in zip(axs, [0.05, 0.3, 1.02], ["$\\eta=0.05$: too slow", "$\\eta=0.3$: just right", "$\\eta=1.02$: diverges"]):
+        ax.plot(x, g(x), color=MUTED, lw=2)
+        p = 2.8; pts = [p]
+        for _ in range(8): p = p - eta * dg(p); pts.append(p)
+        pts = np.array(pts); pts = pts[np.abs(pts) < 3.3]
+        ax.plot(pts, g(pts), "o-", color=[BLUE, GREEN, CORAL][[0.05, 0.3, 1.02].index(eta)], ms=8, lw=2)
+        ax.set_title(t); ax.set_ylim(-0.5, 11)
+    f.tight_layout()
+    return f
+
+
+@fig("d10_optim")
+def _():
+    A = np.array([1.0, 12.0])
+    loss = lambda p: 0.5 * (A * p ** 2).sum(); grad = lambda p: A * p
+    def run(kind, steps=60):
+        p = np.array([-4.0, 1.6]); v = np.zeros(2); m = np.zeros(2); s = np.zeros(2); P = [p.copy()]
+        for t in range(1, steps + 1):
+            g = grad(p)
+            if kind == "sgd": p = p - 0.155 * g
+            elif kind == "mom": v = 0.75 * v + g; p = p - 0.035 * v
+            else:
+                m = 0.9 * m + 0.1 * g; s = 0.999 * s + 0.001 * g * g
+                mh = m / (1 - 0.9 ** t); sh = s / (1 - 0.999 ** t); p = p - 0.12 * mh / (np.sqrt(sh) + 1e-8)
+            P.append(p.copy())
+        return np.array(P)
+    x, y = np.meshgrid(np.linspace(-4.5, 1.5, 200), np.linspace(-2, 2, 200))
+    f, ax = plt.subplots(figsize=(11, 5.2))
+    ax.contour(x, y, 0.5 * (x ** 2 + 12 * y ** 2), levels=14, colors=GRID, linewidths=1.5)
+    for k, c, n in (("sgd", CORAL, "Gradient descent"), ("mom", BLUE, "Momentum"), ("adam", GREEN, "Adam")):
+        P = run(k); ax.plot(P[:, 0], P[:, 1], "o-", color=c, ms=4, lw=2, label=n)
+    ax.scatter([0], [0], marker="*", s=300, color=GOLD, zorder=6); ax.legend(fontsize=14, loc="upper right", frameon=True, facecolor="white")
+    ax.set_aspect("equal"); ax.set_title("Same start, same budget: an elongated valley")
+    return f
+
+
+@fig("d10_sched")
+def _():
+    T = 1000; w = 60; t = np.arange(T)
+    lr = np.where(t < w, t / w, 0.5 * (1 + np.cos(np.pi * (t - w) / (T - w))))
+    f, ax = plt.subplots(figsize=(9, 4.4))
+    ax.plot(t, 3e-4 * lr, color=VIOLET); ax.axvspan(0, w, color=GOLD, alpha=0.2); ax.text(8, 3.1e-4, "warm-up", fontsize=14, color=NAVY)
+    ax.text(400, 2.3e-4, "cosine decay", fontsize=15, color=NAVY); ax.set_xlabel("training step"); ax.set_ylabel("learning rate")
+    ax.set_title("Warm-up + cosine schedule (typical for transformers)")
+    return f
+
+
+@fig("d10_lagrange")
+def _():
+    x, y = np.meshgrid(np.linspace(-0.5, 3, 300), np.linspace(-0.5, 3, 300))
+    f, ax = plt.subplots(figsize=(6.5, 6.2))
+    cs = ax.contour(x, y, x * y, levels=[0.5, 1, 1.5, 2.25, 3, 4], cmap="viridis"); ax.clabel(cs, fontsize=11)
+    xx = np.linspace(-0.5, 3, 10); ax.plot(xx, 3 - xx, color=CORAL, lw=3, label="constraint $x+y=3$")
+    ax.scatter([1.5], [1.5], color=NAVY, s=90, zorder=6); ax.text(1.6, 1.62, "optimum (1.5, 1.5)", fontsize=14)
+    arrow(ax, (1.5, 1.5), (2.1, 2.1), GREEN, lw=2.5, label="$\\nabla f \\parallel \\nabla g$", off=(0.05, 0.05), fs=15)
+    ax.set_xlim(-0.2, 3); ax.set_ylim(-0.2, 3); ax.set_aspect("equal"); ax.legend(loc="upper right", fontsize=13, frameon=True, facecolor="white")
+    ax.set_title("Maximise $xy$ subject to $x+y=3$")
+    return f
+
+
 if __name__ == "__main__":
     pre = sys.argv[1:]
     for name, fn in REG.items():
