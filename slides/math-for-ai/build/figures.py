@@ -589,6 +589,253 @@ def _():
     return f
 
 
+
+# ------------------------------------------------------------------ Day 11
+@fig("d11_activations")
+def _():
+    from math import erf
+    z = np.linspace(-4, 4, 400)
+    sig = 1 / (1 + np.exp(-z)); th = np.tanh(z); relu = np.maximum(0, z)
+    Phi = 0.5 * (1 + np.vectorize(erf)(z / np.sqrt(2))); gelu = z * Phi
+    f, (a, b) = plt.subplots(1, 2, figsize=(13, 4.6))
+    for y, c, n in ((sig, TEAL, "sigmoid"), (th, VIOLET, "tanh"), (relu, GOLD, "ReLU"), (gelu, CORAL, "GELU")):
+        a.plot(z, y, color=c, label=n)
+    a.set_ylim(-1.5, 3); a.legend(fontsize=14); a.set_title("Activation $\\phi(z)$")
+    dg = np.gradient(gelu, z)
+    for y, c, n in ((sig * (1 - sig), TEAL, "sigmoid′ (max 0.25)"), (1 - th ** 2, VIOLET, "tanh′"), ((z > 0).astype(float), GOLD, "ReLU′"), (dg, CORAL, "GELU′")):
+        b.plot(z, y, color=c, label=n)
+    b.set_ylim(-0.2, 1.3); b.legend(fontsize=14); b.set_title("Derivative $\\phi'(z)$: what backprop multiplies by")
+    f.tight_layout()
+    return f
+
+
+@fig("d11_init")
+def _():
+    rng = np.random.default_rng(0)
+    L, n = 20, 512
+    x0 = rng.normal(size=(1000, n))
+    f, ax = plt.subplots(figsize=(9, 4.8))
+    for scale, c, lab in ((0.5, CORAL, "std = 0.5·√(2/n): signal vanishes"), (1.0, GREEN, "He init std = √(2/n): stable"), (1.5, VIOLET, "std = 1.5·√(2/n): signal explodes")):
+        h = x0.copy(); stds = [h.std()]
+        for _ in range(L):
+            W = rng.normal(0, scale * np.sqrt(2 / n), size=(n, n)); h = np.maximum(0, h @ W); stds.append(h.std())
+        ax.semilogy(stds, color=c, label=lab, marker="o", ms=4)
+    ax.set_xlabel("layer"); ax.set_ylabel("activation std (log)"); ax.legend(fontsize=13)
+    ax.set_title("20-layer ReLU network: initial scale decides everything")
+    return f
+
+
+@fig("d11_boundary")
+def _():
+    rng = np.random.default_rng(1)
+    n = 300; r = np.r_[rng.normal(1, 0.15, n), rng.normal(2.2, 0.2, n)]; t = rng.uniform(0, 2 * np.pi, 2 * n)
+    X = np.c_[r * np.cos(t), r * np.sin(t)]; y = np.r_[np.zeros(n), np.ones(n)]
+    # logistic regression
+    w = np.zeros(2); b = 0.0
+    for _ in range(500):
+        p = 1 / (1 + np.exp(-(X @ w + b))); w -= 0.5 * X.T @ (p - y) / len(y); b -= 0.5 * (p - y).mean()
+    # 2-layer MLP
+    H = 16; W1 = rng.normal(0, 1, (2, H)); b1 = np.zeros(H); W2 = rng.normal(0, 0.5, H); b2 = 0.0
+    for _ in range(3000):
+        z1 = X @ W1 + b1; h = np.tanh(z1); p = 1 / (1 + np.exp(-(h @ W2 + b2)))
+        d2 = (p - y) / len(y); gW2 = h.T @ d2; gb2 = d2.sum(); dh = np.outer(d2, W2) * (1 - h ** 2)
+        gW1 = X.T @ dh; gb1 = dh.sum(0)
+        for P_, G in ((W1, gW1), (b1, gb1), (W2, gW2)): P_ -= 1.0 * G
+        b2 -= 1.0 * gb2
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 300), np.linspace(-3, 3, 300)); G = np.c_[xx.ravel(), yy.ravel()]
+    f, axs = plt.subplots(1, 2, figsize=(12, 5.4))
+    P1 = (1 / (1 + np.exp(-(G @ w + b)))).reshape(xx.shape)
+    P2 = (1 / (1 + np.exp(-(np.tanh(G @ W1 + b1) @ W2 + b2)))).reshape(xx.shape)
+    for ax, Pm, t_ in ((axs[0], P1, "Logistic regression: a straight line fails"), (axs[1], P2, "MLP with 16 hidden units: bends the boundary")):
+        ax.contourf(xx, yy, Pm, levels=20, cmap="RdBu_r", alpha=0.35); ax.contour(xx, yy, Pm, levels=[0.5], colors=NAVY, linewidths=2.5)
+        ax.scatter(X[y == 0, 0], X[y == 0, 1], s=8, color=BLUE); ax.scatter(X[y == 1, 0], X[y == 1, 1], s=8, color=CORAL)
+        ax.set_aspect("equal"); ax.set_title(t_, fontsize=15); ax.set_xticks([]); ax.set_yticks([])
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 12
+@fig("d12_scaling")
+def _():
+    rng = np.random.default_rng(0)
+    f, (a, b) = plt.subplots(1, 2, figsize=(13, 4.4))
+    ds = [4, 16, 64, 256, 1024]
+    stds = [np.std((rng.normal(size=(5000, d)) * rng.normal(size=(5000, d))).sum(1)) for d in ds]
+    a.plot(ds, stds, "o-", color=CORAL, label="std of $\\mathbf{q}\\cdot\\mathbf{k}$"); a.plot(ds, np.sqrt(ds), "--", color=MUTED, label="$\\sqrt{d}$")
+    a.plot(ds, np.array(stds) / np.sqrt(ds), "o-", color=GREEN, label="std of $\\mathbf{q}\\cdot\\mathbf{k}/\\sqrt{d}$")
+    a.set_xscale("log", base=2); a.legend(fontsize=13); a.set_xlabel("$d_k$"); a.set_title("Dot products grow like $\\sqrt{d_k}$")
+    s = rng.normal(size=8) * np.sqrt(512)
+    p1 = np.exp(s - s.max()); p1 /= p1.sum(); s2 = s / np.sqrt(512); p2 = np.exp(s2 - s2.max()); p2 /= p2.sum()
+    xs = np.arange(8); b.bar(xs - 0.2, p1, 0.4, color=CORAL, label="unscaled: one-hot, gradients ≈ 0"); b.bar(xs + 0.2, p2, 0.4, color=GREEN, label="scaled by $1/\\sqrt{d_k}$: soft")
+    b.legend(fontsize=13); b.set_title("Softmax over 8 keys, $d_k=512$"); b.set_xlabel("key")
+    f.tight_layout()
+    return f
+
+
+@fig("d12_posenc")
+def _():
+    T, d = 64, 64
+    pos = np.arange(T)[:, None]; i = np.arange(d // 2)[None]
+    ang = pos / (10000 ** (2 * i / d)); PE = np.zeros((T, d)); PE[:, 0::2] = np.sin(ang); PE[:, 1::2] = np.cos(ang)
+    f, (a, b) = plt.subplots(1, 2, figsize=(13, 4.6), gridspec_kw={"width_ratios": [1.3, 1]})
+    im = a.imshow(PE, cmap="RdBu_r", aspect="auto"); a.set_xlabel("embedding dimension"); a.set_ylabel("position"); a.set_title("Sinusoidal position encodings"); a.grid(False)
+    for k, c in ((0, CORAL), (4, BLUE), (16, GREEN)):
+        b.plot(PE[:, 2 * k], color=c, label=f"dim {2*k}: wavelength {2*np.pi*10000**(2*k/d):.0f}")
+    b.set_xlabel("position"); b.set_ylim(-1.15, 1.9); b.legend(fontsize=12, loc="upper center", ncol=3, framealpha=0.95, handlelength=1.2, columnspacing=0.8); b.set_title("Each pair of dims is a clock at its own speed")
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 13
+def _swiss(n, rng):
+    t = 1.5 * np.pi * (1 + 2 * rng.random(n)); return np.c_[t * np.cos(t), t * np.sin(t)] / 6
+
+
+@fig("d13_diffusion")
+def _():
+    rng = np.random.default_rng(0)
+    x0 = _swiss(1500, rng)
+    T = 1000; betas = np.linspace(1e-4, 0.02, T); abar = np.cumprod(1 - betas)
+    f, axs = plt.subplots(1, 5, figsize=(15, 3.4))
+    for ax, t in zip(axs, [0, 50, 150, 400, 999]):
+        xt = np.sqrt(abar[t]) * x0 + np.sqrt(1 - abar[t]) * rng.normal(size=x0.shape)
+        ax.scatter(xt[:, 0], xt[:, 1], s=3, color=VIOLET, alpha=0.6); ax.set_xlim(-3.2, 3.2); ax.set_ylim(-3.2, 3.2); ax.set_aspect("equal")
+        ax.set_title(f"$t={t}$" + ("  (data)" if t == 0 else "  (noise)" if t == 999 else "") + f"\n$\\sqrt{{\\bar\\alpha_t}}={np.sqrt(abar[t]):.2f}$", fontsize=14)
+        ax.set_xticks([]); ax.set_yticks([])
+    f.tight_layout()
+    return f
+
+
+@fig("d13_gan")
+def _():
+    x = np.linspace(-4, 6, 500)
+    N = lambda m, s: np.exp(-(x - m) ** 2 / (2 * s * s)) / (s * np.sqrt(2 * np.pi))
+    f, axs = plt.subplots(1, 3, figsize=(14, 3.9))
+    pdata = N(2, 0.7)
+    for ax, (m, s), t in zip(axs, [(-1.5, 1.0), (0.8, 0.9), (2, 0.7)], ["start", "training", "equilibrium"]):
+        pg = N(m, s); D = pdata / (pdata + pg + 1e-12)
+        ax.fill_between(x, pdata, color=BLUE, alpha=0.25, label="$p_{data}$"); ax.plot(x, pg, color=GREEN, label="$p_G$")
+        ax2 = ax.twinx(); ax2.plot(x, D, color=CORAL, ls="--", lw=2, label="$D^*(x)$"); ax2.set_ylim(0, 1.05); ax2.grid(False)
+        ax.set_title(t); ax.set_yticks([])
+        if t == "start":
+            ax.legend(loc="upper left", fontsize=12); ax2.legend(loc="upper right", fontsize=12)
+    f.tight_layout()
+    return f
+
+
+@fig("d13_flow")
+def _():
+    rng = np.random.default_rng(0)
+    z = rng.normal(size=20000)
+    x = np.exp(0.6 * z)  # x = f(z)
+    f, (a, b) = plt.subplots(1, 2, figsize=(12, 4.2))
+    a.hist(z, 80, density=True, color=BLUE, alpha=0.7); a.set_title("$z\\sim\\mathcal{N}(0,1)$")
+    b.hist(x, 120, range=(0, 5), density=True, color=VIOLET, alpha=0.7)
+    xs = np.linspace(0.01, 5, 400); zz = np.log(xs) / 0.6; px = np.exp(-zz ** 2 / 2) / np.sqrt(2 * np.pi) / (0.6 * xs)
+    b.plot(xs, px, color=CORAL, lw=2.5, label="$p_z(f^{-1}(x))\\,|df^{-1}/dx|$"); b.legend(fontsize=14); b.set_title("$x=f(z)=e^{0.6z}$: density squeezed and stretched")
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 14
+@fig("d14_grid")
+def _():
+    H, W = 4, 5; goal = (0, 4); pit = (1, 4); wall = {(1, 1), (2, 3)}
+    gamma = 0.9; V = np.zeros((H, W)); acts = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    for _ in range(100):
+        Vn = V.copy()
+        for i in range(H):
+            for j in range(W):
+                if (i, j) in (goal, pit) or (i, j) in wall: continue
+                best = -1e9
+                for di, dj in acts:
+                    ni, nj = i + di, j + dj
+                    if not (0 <= ni < H and 0 <= nj < W) or (ni, nj) in wall: ni, nj = i, j
+                    r = 1 if (ni, nj) == goal else -1 if (ni, nj) == pit else -0.04
+                    best = max(best, r + gamma * (0 if (ni, nj) in (goal, pit) else V[ni, nj]))
+                Vn[i, j] = best
+        V = Vn
+    f, ax = plt.subplots(figsize=(7.6, 6.2))
+    M = np.ma.array(V, mask=np.zeros_like(V, bool))
+    ax.imshow(V, cmap="RdYlGn", vmin=-0.4, vmax=1); ax.grid(False)
+    for i in range(H):
+        for j in range(W):
+            if (i, j) in wall: ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, color="#444")); continue
+            if (i, j) == goal: ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, color=GREEN)); ax.text(j, i, "GOAL\n+1", ha="center", va="center", fontsize=15, color="white", weight="bold"); continue
+            if (i, j) == pit: ax.add_patch(plt.Rectangle((j - .5, i - .5), 1, 1, color=CORAL)); ax.text(j, i, "PIT\n−1", ha="center", va="center", fontsize=15, color="white", weight="bold"); continue
+            best, bd = -1e9, None
+            for di, dj in acts:
+                ni, nj = i + di, j + dj
+                if not (0 <= ni < H and 0 <= nj < W) or (ni, nj) in wall: continue
+                r = 1 if (ni, nj) == goal else -1 if (ni, nj) == pit else -0.04
+                q = r + gamma * (0 if (ni, nj) in (goal, pit) else V[ni, nj])
+                if q > best: best, bd = q, (di, dj)
+            ax.text(j, i + 0.28, f"{V[i,j]:.2f}", ha="center", va="center", fontsize=13, color=NAVY)
+            ax.annotate("", xy=(j + 0.3 * bd[1], i - 0.1 + 0.3 * bd[0]), xytext=(j - 0.05 * bd[1], i - 0.1 - 0.05 * bd[0]), arrowprops=dict(arrowstyle="-|>", color=NAVY, lw=2.2))
+    ax.set_xticks([]); ax.set_yticks([]); ax.set_title("Value iteration: $V^*(s)$ and the greedy policy ($\\gamma=0.9$)")
+    return f
+
+
+@fig("d14_ppo")
+def _():
+    r = np.linspace(0, 2, 400); eps = 0.2
+    f, axs = plt.subplots(1, 2, figsize=(12, 4.2))
+    for ax, A, t in ((axs[0], 1, "Advantage $A>0$: good action"), (axs[1], -1, "Advantage $A<0$: bad action")):
+        ax.plot(r, r * A, color=MUTED, ls="--", lw=2, label="unclipped $rA$")
+        ax.plot(r, np.minimum(r * A, np.clip(r, 1 - eps, 1 + eps) * A), color=VIOLET, lw=3.5, label="PPO objective")
+        ax.axvline(1, color=GRID); ax.axvspan(1 - eps, 1 + eps, color=GOLD, alpha=0.15)
+        ax.set_xlabel("probability ratio $r=\\pi_\\theta/\\pi_{old}$"); ax.set_title(t); ax.legend(fontsize=13, loc="upper left" if A > 0 else "lower left")
+    f.tight_layout()
+    return f
+
+
+# ------------------------------------------------------------------ Day 15
+@fig("d15_roc")
+def _():
+    rng = np.random.default_rng(3)
+    yt = np.r_[np.ones(200), np.zeros(1800)]
+    sA = np.r_[rng.normal(1.6, 1, 200), rng.normal(0, 1, 1800)]; sB = np.r_[rng.normal(0.8, 1, 200), rng.normal(0, 1, 1800)]
+    f, (a, b) = plt.subplots(1, 2, figsize=(12, 5))
+    for s, c, n in ((sA, GREEN, "model A"), (sB, CORAL, "model B")):
+        th = np.sort(s)[::-1]; P = yt.sum(); Nn = len(yt) - P
+        tp = np.cumsum(yt[np.argsort(-s)]); fp = np.cumsum(1 - yt[np.argsort(-s)])
+        tpr, fpr = tp / P, fp / Nn; prec = tp / (tp + fp)
+        auc = np.trapezoid(tpr, fpr) if hasattr(np, "trapezoid") else np.trapz(tpr, fpr)
+        a.plot(fpr, tpr, color=c, label=f"{n}: AUC = {auc:.2f}"); b.plot(tpr, prec, color=c, label=n)
+    a.plot([0, 1], [0, 1], ls="--", color=MUTED, lw=1.5, label="random"); a.set_xlabel("false positive rate"); a.set_ylabel("true positive rate (recall)"); a.legend(fontsize=13); a.set_title("ROC curve")
+    b.axhline(0.1, ls="--", color=MUTED, lw=1.5, label="random = positive rate 10%"); b.set_xlabel("recall"); b.set_ylabel("precision"); b.legend(fontsize=13); b.set_title("Precision–recall (better for rare positives)")
+    f.tight_layout()
+    return f
+
+
+@fig("d15_seeds")
+def _():
+    rng = np.random.default_rng(7)
+    A = 84.0 + rng.normal(0, 0.45, 5); B = 84.4 + rng.normal(0, 0.45, 5); C = 85.6 + rng.normal(0, 0.45, 5)
+    f, ax = plt.subplots(figsize=(8, 4.8))
+    for i, (v, c, n) in enumerate(((A, MUTED, "baseline"), (B, CORAL, "method X"), (C, GREEN, "method Y"))):
+        ax.scatter(np.full(5, i) + rng.uniform(-0.08, 0.08, 5), v, color=c, s=60, zorder=5)
+        ax.errorbar(i + 0.25, v.mean(), yerr=1.96 * v.std(ddof=1) / np.sqrt(5), fmt="o", color=NAVY, capsize=8, ms=9, lw=2.5)
+    ax.set_xticks([0, 1, 2]); ax.set_xticklabels(["baseline", "method X\n(+0.4)", "method Y\n(+1.6)"]); ax.set_ylabel("accuracy (%)")
+    ax.set_title("5 seeds each: dots = runs, bars = 95% CI of the mean"); ax.set_xlim(-0.5, 2.6)
+    return f
+
+
+@fig("d15_scaling")
+def _():
+    C = np.logspace(17, 24, 30)
+    L = 1.7 + (C / 1e10) ** -0.12 * 9
+    rng = np.random.default_rng(1); Lo = L * np.exp(rng.normal(0, 0.01, len(C)))
+    f, (a, b) = plt.subplots(1, 2, figsize=(13, 4.6))
+    a.plot(C, Lo, "o", color=BLUE, ms=6); a.plot(C, L, color=CORAL, lw=2.5, label="$L(C)=E+A\\,C^{-\\alpha}$")
+    a.set_xscale("log"); a.set_xlabel("training compute $C$ (FLOPs)"); a.set_ylabel("validation loss"); a.axhline(1.7, ls="--", color=MUTED, lw=1.5); a.text(1e17, 1.75, "irreducible $E$ (entropy of text, Day 9)", fontsize=13, color=MUTED)
+    a.legend(fontsize=14); a.set_title("Loss falls as a power law in compute")
+    a2 = b; a2.loglog(C, Lo - 1.7, "o", color=BLUE, ms=6); a2.loglog(C, L - 1.7, color=CORAL, lw=2.5)
+    a2.set_xlabel("compute $C$"); a2.set_ylabel("$L-E$"); a2.set_title("On log–log axes a power law is a straight line, slope $-\\alpha$")
+    f.tight_layout()
+    return f
+
+
 if __name__ == "__main__":
     pre = sys.argv[1:]
     for name, fn in REG.items():

@@ -321,7 +321,8 @@ function deck({ day, short }) {
     add("Content", async (s) => {
       ttl(s, title);
       const fw = wide || !points.length ? X1 - X0 : 7.35;
-      const fh = caption ? 4.85 : 5.25;
+      const under = points.length && fw >= 10;
+      const fh = under ? (caption ? 3.55 : 3.95) : caption ? 4.85 : 5.25;
       if (fig.path) fit(s, fig, X0, Y0, fw, fh, { maxScale: 3 });
       else fitFile(s, fig.file, fig.w, fig.h, X0, Y0, fw, fh);
       if (caption) T(s, caption, { x: X0, y: Y0 + fh + 0.08, w: fw, h: 0.35, fontSize: 12, italic: true, color: HEX.muted, align: "center" });
@@ -334,7 +335,14 @@ function deck({ day, short }) {
           T(s, runs(points[i].text || points[i]), { x: px + 0.68, y: y + 0.12, w: X1 - px - 0.85, h: rh - 0.38, fontSize: 14, color: C.text1, valign: "middle" });
         }
       } else if (points.length) {
-        // points under a wide figure as chips
+        // points under a wide figure as icon cards
+        const n = points.length, gap = 0.25, cw = (X1 - X0 - gap * (n - 1)) / n;
+        for (let i = 0; i < n; i++) {
+          const x = X0 + i * (cw + gap);
+          card(s, x, 5.55, cw, 1.2, HEX.panel);
+          await badge(s, x + 0.18, 5.73, 0.36, points[i].icon || "check", HEX.green);
+          T(s, runs(points[i].text || points[i]), { x: x + 0.68, y: 5.62, w: cw - 0.85, h: 1.02, fontSize: 13, color: C.text1, valign: "middle" });
+        }
       }
       if (notes) s.addNotes(notes);
     });
